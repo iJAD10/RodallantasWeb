@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Web_Roda_Llantas.Entities.VehiculosEntities>
+
+@{
+    ViewData["Title"] = "Consulta de Vehiculos";
+    var usuario = Context.Session.GetString("Correo")?.ToString();
+}
+
+<div class="col-lg-12 stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Vehiculos</h4>
+            <div class="table-responsive">
+                <a href="@Url.Action("RegistrarVehiculos","Vehiculos")" class="btn btn-primary btn-nuevo-vehiculo">Nuevo Vehículo</a>
+                <table id="TablaVehiculos" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Placa</th>
+                            <th>Año de Lanzamiento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Veh_Id</td>
+                                <td>@item.Veh_Marca</td>
+                                <td>@item.Veh_Modelo</td>
+                                <td>@item.Veh_Placa</td>
+                                <td>@item.Veh_Fecha_Lanzamiento</td>
+                                <td>
+                                    <a href="@Url.Action("ActualizarVehiculos", "Vehiculos", new { q = item.Veh_Id })">Actualizar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

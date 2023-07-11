@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"] | Roda Llantas</title>
+    <link href="~/template/vendors/feather/feather.css" rel="stylesheet" />
+    <link href="~/template/vendors/ti-icons/css/themify-icons.css" rel="stylesheet" />
+    <link href="~/template/vendors/css/vendor.bundle.base.css" rel="stylesheet" />
+    <link href="~/template/css/vertical-layout-light/style.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/template/images/icon-wheel.png" />
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0">
+
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+    <script src="~/template/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/template/js/off-canvas.js"></script>
+    <script src="~/template/js/hoverable-collapse.js"></script>
+    <script src="~/template/js/template.js"></script>
+    <script src="~/template/js/settings.js"></script>
+    <script src="~/template/js/todolist.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    @if (TempData["notification"] != null)
+    {
+        @Html.Raw(TempData["notification"])
+    }
+
+    <script src="~/js/main.js"></script>
+</body>
+
+</html>

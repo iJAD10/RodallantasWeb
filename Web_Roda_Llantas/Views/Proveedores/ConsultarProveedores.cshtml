@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Web_Roda_Llantas.Entities.ProveedoresEntities>
+
+@{
+    ViewData["Tittle"] = "Consulta de Proveedores";
+    var usuario = Context.Session.GetString("Correo")?.ToString();
+}
+
+<div class="card-body">
+    <h4 class="card-title">Proveedores</h4>
+    <div class="table-responsive">
+        <a href="@Url.Action("RegistrarProveedores","Proveedores")" class="btn btn-primary">Nuevo Proveedor</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>DIreccion</th>
+                    <th>Telefono</th>
+                    <th>Telefono Fijo</th>
+                    <th>Empresa</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Prov_Id</td>
+                        <td>@item.Prov_Apellido_Agente</td>
+                        <td>@item.Prov_Nombre_Agente</td>
+                        <td>@item.Prov_Correo</td>
+                        <td>@item.Prov_Direccion</td>
+                        <td>@item.Prov_Telefono</td>
+                        <td>@item.Prov_Telefono_Fijo</td>
+                        <td>@item.Prov_Nombre_Empresa</td>
+                        <td> @(item.Prov_Estado ? "Activo" : "Inactivo") </td>
+                        <td>
+                            <a href="@Url.Action("ActualizarProveedores", "Proveedores", new { q = item.Prov_Id })">Actualizar</a>
+                            <a href="" onclick="InactivarProveedor(@item.Prov_Id);">Cambiar Estado</a>
+                        </td>
+                    </tr>
+                }
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

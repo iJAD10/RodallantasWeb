@@ -1,0 +1,61 @@
+﻿@model Web_Roda_Llantas.Entities.ProveedoresEntities
+@{
+    ViewData["Title"] = "ActualizarProveedores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Actualizar Proveedor</h4>
+
+                @using (Html.BeginForm("ActualizarProveedores", "Proveedores", FormMethod.Post, new { @class = "forms-sample" }))
+                {
+                    @Html.HiddenFor(m => m.Prov_Id)
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Apellido</label>
+                            @Html.TextBoxFor(m => m.Prov_Apellido_Agente, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el Apellido del Agente" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Nombre</label>
+                            @Html.TextBoxFor(m => m.Prov_Nombre_Agente, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el Nombre del Agente" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Correo Electronico</label>
+                            @Html.TextBoxFor(m => m.Prov_Correo, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el Correo del Agente" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Direccion</label>
+                            @Html.TextBoxFor(m => m.Prov_Direccion, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese la Direccion de la Empresa" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Telefono</label>
+                            @Html.TextBoxFor(m => m.Prov_Telefono, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el Telefono del Agente" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Telefono Fijo</label>
+                            @Html.TextBoxFor(m => m.Prov_Telefono_Fijo, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el Telefono Fijo de la Empresa" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Empresa</label>
+                            @Html.TextBoxFor(m => m.Prov_Nombre_Empresa, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el Nombre de la Empresa" })
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary mr-2" value="Actualizar Proveedor">
+                }
+            </div>
+        </div>
+    </div>
+</div>

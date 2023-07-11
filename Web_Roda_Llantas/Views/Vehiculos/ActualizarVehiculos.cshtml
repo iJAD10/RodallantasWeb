@@ -1,0 +1,46 @@
+﻿@model Web_Roda_Llantas.Entities.VehiculosEntities
+@{
+    ViewData["Tittle"] = "ActualizarVehiculos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Actualizar Vehiculos</h4>
+
+                @using (Html.BeginForm("ActualizarVehiculo", "Vehiculos", FormMethod.Post, new { @class = "forms-sample" }))
+                {
+                    @Html.HiddenFor(m => m.Veh_Id)
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Marca </label>
+                            @Html.TextBoxFor(m => m.Veh_Marca, new { @class="form-control form-control-sm", @required = true,
+                        @readOnly = true })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Modelo</label>
+                            @Html.TextBoxFor(m => m.Veh_Modelo, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el modelo de su carro" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Placa</label>
+                            @Html.TextBoxFor(m => m.Veh_Placa, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese la placa de su carro" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Año</label>
+                            @Html.TextBoxFor(m => m.Veh_Fecha_Lanzamiento, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese la fecha de lanzamiento de su carro" })
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary mr-2" value="Actualizar Vehiculo">
+                }
+            </div>
+        </div>
+    </div>
+</div>

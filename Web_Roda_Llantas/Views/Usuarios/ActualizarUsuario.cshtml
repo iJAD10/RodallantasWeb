@@ -1,0 +1,66 @@
+﻿@model Web_Roda_Llantas.Entities.UsuarioEntities
+@{
+    ViewData["Title"] = "Actualizar datos del usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Actualizar Usuario</h4>
+                @using (Html.BeginForm("ActualizarUsuario", "Usuarios", FormMethod.Post, new { @class = "forms-sample" }))
+                {
+                    @Html.HiddenFor(m => m.Usu_Id)
+
+                    <div class="form-group">
+                        <label for="CorreoElectronico">Correo Electrónico:</label>
+                        @Html.TextBoxFor(m => m.Usu_Correo,
+                            new
+                            {
+                                @class="form-control",
+                                @type="email",
+                                @requied = true,
+                                @readOnly = true
+                            })
+                    </div>
+                    <div class="form-group">
+                        <label for="Contrasenna">Contraseña:</label>
+                        @Html.TextBoxFor(m => m.Usu_Clave,
+                            new
+                            {
+                                @class="form-control",
+                                @type="Password",
+                                @placeholder="Ingrese su nueva contraseña"
+                            })
+                    </div>
+                    <div class="form-group">
+                        <label for="Identificacion">Identificación:</label>
+                        @Html.TextBoxFor(m => m.Usu_Cedula,
+                            new
+                            {
+                                @class="form-control",
+                                @type="number",
+                                @minlength="9",
+                                @maxlength="9",
+                                @requied=true,
+                                @onKeyup="BuscarNombreApi()"
+                            })
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre">Nombre:</label>
+                        @Html.TextBoxFor(m => m.Usu_Nombre,
+                            new
+                            {
+                                @class="form-control",
+                                @type="text",
+                                @requied = true,
+                                @readOnly = true
+                            })
+                    </div>
+                    <input type="submit" value="Actualizar" class="btn btn-primary mr-2" />
+                }
+            </div>
+        </div>
+    </div>
+</div>

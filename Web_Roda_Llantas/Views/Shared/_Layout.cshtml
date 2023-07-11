@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"] | Roda Llantas</title>
+    <link href="~/template/vendors/feather/feather.css" rel="stylesheet" />
+    <link href="~/template/vendors/ti-icons/css/themify-icons.css" rel="stylesheet" />
+    <link href="~/template/vendors/css/vendor.bundle.base.css" rel="stylesheet" />
+    <link href="~/template/vendors/datatables.net-bs4/datatables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/template/js/select.datatables.min.css" rel="stylesheet" />
+    <link href="~/template/css/vertical-layout-light/style.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/template/images/icon-wheel.png" />
+</head>
+<body>
+    
+    <div class="container-scroller">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"></div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                            <i class="icon-head menu-icon"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a href="" class="dropdown-item">
+                                <i class="icon-head menu-icon text-primary"></i>
+                                @Context.Session.GetString("Nombre")?.ToString()
+                            </a>
+                            <a href="@Url.Action("ConsultarCarrito", "Carrito")" class="dropdown-item">
+                                <i class="ti-shopping-cart text-primary"></i>
+                                Mi Carrito
+                            </a>
+                            <a href="@Url.Action("CerrarSesion", "Home")" class="dropdown-item">
+                                <i class="ti-power-off text-primary"></i>
+                                Cerrar Sesión
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Principal", "Home")">
+                            <i class="icon-grid menu-icon"></i>
+                            <span class="menu-title">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#usuarios" aria-expanded="false" aria-controls="usuarios">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">Usuarios</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="usuarios">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarUsuarios","Usuarios")">Consulta de Usuarios</a></li>
+                            </ul>
+                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#servicios" aria-expanded="false" aria-controls="servicios">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">Servicios</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="servicios">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarServicios","Servicios")">Lista de Servicios</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#vehiculos" aria-expanded="false" aria-controls="vehiculos">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">Vehiculos</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="vehiculos">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarVehiculos","Vehiculos")">Lista de Vehículos</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#proovedores" aria-expanded="false" aria-controls="proovedores">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">Proveedores</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="proovedores">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarProveedores","Proveedores")">Información</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#productos" aria-expanded="false" aria-controls="productos">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">Productos</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="productos">
+                            <ul class="nav flex-column sub-menu">
+                                @foreach(var item in @ViewBag.OpcionesProductos )
+                                {
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarProductos","Productos", new { Prod_Id = item.TP_Nombre })">@item.TP_Nombre</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#reservaciones" aria-expanded="false" aria-controls="reservaciones">
+			                <i class="icon-layout menu-icon"></i>
+			                <span class="menu-title">Reservaciones</span>
+			                <i class="menu-arrow"></i>
+		                </a>
+						<div class="collapse" id="reservaciones">
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarReservaciones","Reservaciones")">Consultar</a></li>
+							</ul>
+							<ul class="nav flex-column sub-menu">
+								<li class="nav-item"> <a class="nav-link" href="@Url.Action("RegistrarReservacion", "Reservaciones")">Reservar</a></li>
+							</ul>
+						</div>
+	                </li>
+                </ul>
+            </nav>
+            <div class="main-panel">
+                <div class="content-wrapper">
+
+                    @RenderBody()
+
+                </div>
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Roda Llantas de Turrialba S.A. © 2023.</span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="~/template/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/template/vendors/chart.js/chart.min.js"></script>
+    <script src="~/template/vendors/datatables.net/jquery.datatables.js"></script>
+    <script src="~/template/vendors/datatables.net-bs4/datatables.bootstrap4.js"></script>
+    <script src="~/template/js/datatables.select.min.js"></script>
+    <script src="~/template/js/off-canvas.js"></script>
+    <script src="~/template/js/hoverable-collapse.js"></script>
+    <script src="~/template/js/template.js"></script>
+    <script src="~/template/js/settings.js"></script>
+    <script src="~/template/js/todolist.js"></script>
+    <script src="~/template/js/dashboard.js"></script>
+    <script src="~/template/js/chart.roundedbarcharts.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    @if (TempData["notification"] != null)
+    {
+        @Html.Raw(TempData["notification"])
+    }
+
+    <script src="~/js/main.js"></script>
+    
+</body>
+
+</html>

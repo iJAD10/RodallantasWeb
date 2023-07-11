@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Web_Roda_Llantas.Entities.ReservacionesEntities>
+
+@{
+	ViewData["Title"] = "Detalle reservación";
+	var usuario = Context.Session.GetString("Correo")?.ToString();
+}
+
+<div class="col-lg-12 stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<h2 class="card-title">Detalle de reservación #@ViewBag.Reservacion</h2>
+			<hr/>
+			<div class="container">
+				<div class="row mt-3">
+					<div class="col-lg-7">
+						<div class="card text-center">
+							<div class="card-header">
+								<hr />
+								<h3><i class="icon-head menu-icon text-primary"></i> Información personal</h3>
+								<hr/>
+								<p style="font-size: large">Nombre: @ViewBag.Nombre</p>
+								<p style="font-size: large">Cédula: @ViewBag.Cedula</p>
+								<p style="font-size: large">Correo: @ViewBag.Correo</p>
+								<hr />
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-5">
+						<div class="card text-center">
+							<div class="card-header">
+								<hr />
+								<div class="row">
+									<div class="col-sm-6">
+										<h4>Completado</h4>
+									</div>
+									@if (@ViewBag.Completado) //True
+									{
+										<div class="col-sm-6">
+											<p style="font-size: large">Completado</p>
+										</div>
+									}
+									else //False
+									{
+										<div class="col-sm-6">
+											<p style="font-size: large">Incompleto</p>
+										</div>
+									}
+								</div>
+								<hr/>
+								<div class="row">
+									<div class="col-sm-6">
+										<h4>Estado</h4>
+									</div>
+									<div class="col-sm-6">
+										<p style="font-size: large">@ViewBag.Estado</p>
+									</div>
+								</div>
+								<hr/>
+								<div class="row">
+									<div class="col-sm-6">
+										<h4>Vehículo</h4>
+									</div>
+									<div class="col-sm-6">
+										<p style="font-size: large">@ViewBag.Vehiculo</p>
+									</div>
+								</div>
+								<hr/>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row mt-3">
+					<div class="col-lg-12 d-flex justify-content-center">
+						<div class="col-lg-9">
+							<table class="table">
+								<thead>
+								<tr>
+									<th class="text-center" style="font-size: x-large">Detalle del servicio</th>
+									<th class="text-center" style="font-size: x-large">Fecha</th>
+								</tr>
+								</thead>
+								<tbody>
+								@foreach(var item in Model)
+								{
+									<tr>
+										<td class="border text-center" style="font-size: large">@item.Ser_Nombre</td>
+										<td class="border text-center" style="font-size: large">@item.Ser_Fecha</td>
+									</tr>
+								}
+								</tbody>
+							</table>
+							
+							<br/>
+							<hr/>
+							<div class="container d-flex justify-content-center">
+								@if (@ViewBag.Completado) //True
+								{
+									<input type="submit" class="btn btn-danger mr-2" value="Marcar como incompleto" id="cambiarCompletado" onclick="cambiarCompletado(@ViewBag.Reservacion)" style="width: 300px">
+								}
+								else //False
+								{
+									<input type="submit" class="btn btn-primary mr-2" value="Marcar como completo" id="cambiarCompletado" onclick="cambiarCompletado(@ViewBag.Reservacion)" style="width: 300px">
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function cambiarCompletado(reservacion) { //Se valida que se haya escrito una placa
+		$.ajax({
+			url: '/Reservaciones/CambiarCompletado?reservacion=' + reservacion,
+			type: 'GET',
+			dataType: 'json',
+			success: function (res) {
+				location.reload()
+			}
+		});
+
+		//location.reload() //Se recarga la página
+	}
+</script>

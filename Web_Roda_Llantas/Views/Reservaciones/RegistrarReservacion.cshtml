@@ -1,0 +1,154 @@
+﻿@model Web_Roda_Llantas.Entities.ReservacionesEntities
+@{
+    ViewData["Tittle"] = "RegistrarReservacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	#reservarServicios {
+        display: none
+    }
+
+    .container {
+	    text-align: center;
+    }
+	 
+</style>
+
+<div class="row">
+
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				@if (@ViewBag.mensaje != null)
+				{
+					<p>***@ViewBag.mensaje***</p>
+					
+					<br/>
+					<hr/>
+
+				}
+
+				<h4 class="card-title">Reservar</h4>
+
+				@using (Html.BeginForm("RegistrarReservacion", "Reservaciones", FormMethod.Post, new { @class = "forms-sample" }))
+				{
+					<input name="Res_Usuario_Id" value="@Context.Session.GetString("Usu_Id")?.ToString()" style="display: none">
+
+					<fieldset id="vehiculo">
+						<legend>Indique la información del vehículo:</legend>
+						<hr/>
+
+						<div class="row" style="padding-left: 30px">
+							<div class="col-4" style="font-size: large">
+								<label for="placa">Placa: </label>
+								@Html.TextBoxFor(m => m.Veh_Id, new { @class = "form-control-sm", @required = true, @style = "width: 80%; font-size: large; margin-left: 5px", @oninput = "validarPlaca()" })
+							</div>
+							<div class="col-4">
+								<button id="validar" type="button" style="font-size: large; margin-top: 5px" onclick="ConsultarPlaca()" disabled>Validar</button>
+							</div>
+							<div class="col-12">
+								<p id="vehiculoMsg" style="color: gray; padding-left: 60px">*El vehículo debe estar registrado</p>
+							</div>
+						</div>
+						<hr/>
+					</fieldset>
+
+					/*<p id="Usuario_Correo">@Context.Session.GetString("Correo")?.ToString()</p>*/
+					<input name="Usuario_Correo" id="Usuario_Correo" value="@Context.Session.GetString("Correo")?.ToString()" hidden/>
+
+					<fieldset id="reservarServicios">
+						<legend>Seleccione los servicios:</legend>
+						<hr/>
+
+						@foreach (var item in ViewBag.Servicios)
+						{
+							<div class="row" style="padding-left: 30px">
+								<div class="col-6" style="font-size: large">
+									<input type="checkbox" name="ServiciosReservados" value="@item.Ser_Id" onchange="mostrarFecha(this)"> @item.Ser_Nombre <br>
+								</div>
+								<div class="col-4" style="display: none">
+									<label for="FechasServiciosReservados"> Fecha: </label>
+									<input type="date" id="FechasServiciosReservados" name="FechasServiciosReservados" onchange="validarFechas()">
+								</div>
+							</div>
+							<hr>
+						}
+						
+						<div class="container"> <input type="submit" class="btn btn-primary mr-2" value="Reservar" id="reservarBtn" style="width: 300px" disabled> </div>
+						<p style="text-align: center; font-size: small; color: gray;">*Se debe seleccionar al menos un servicio y su fecha</p>
+					</fieldset>
+				}
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="~/js/FuncionesReservacion.js"></script>
+
+<!--<script>
+	function validarPlaca(){ //Se valida que se haya escrito una placa
+        if ($('#Veh_Id').val().length > 0){
+			$('#reservarServicios').prop('disabled', false)
+			$('#validar').prop('disabled', false)
+        } else {
+            $('#validar').prop('disabled', true)
+			$('#reservarServicios').hide()
+        }
+    }
+
+    function ConsultarPlaca() { //Se valida que la placa esté registrada a un vehículo
+        $.ajax({
+            url: '/Vehiculos/ConsultarPlaca?placa=' + $('#Veh_Id').val(),
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                if(res.resultado){
+                    $('#vehiculoMsg').text("El vehículo se encuentra registrado").css("color", "green")
+					$('#reservarServicios').show()
+                } else {
+                    $('#vehiculoMsg').text("El vehículo no se encuentra registrado").css("color","red")
+					$('#reservarServicios').hide()
+                }
+            }
+        });
+    }
+    
+    function mostrarFecha(checkbox) {
+        // Obtener el div que contiene el campo de fecha
+        var fechaDiv = checkbox.parentNode.parentNode.querySelector('.col-4');
+
+        // Mostrar u ocultar el campo de fecha según el estado del checkbox
+        if (checkbox.checked) {
+            fechaDiv.style.display = 'block';
+        } else {
+            fechaDiv.style.display = 'none';
+        }
+		var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+		
+		if (checkboxes.length === 0)
+			$('#reservarBtn').prop('disabled', true)
+		else
+			validarFechas()
+    }
+	
+	function validarFechas() {
+		var checkboxes = (document.querySelectorAll('input[type="checkbox"]:checked')).length;
+
+		var dates = document.querySelectorAll('input[type="date"]');
+		var filteredDates = [];
+
+		dates.forEach(function (date) {
+			if (date.value !== '') {
+				filteredDates.push(date);
+			}
+		});
+		
+		if (checkboxes == filteredDates.length) //Si hay una misma cantidad de fechas que de servicios seleccionados
+			$('#reservarBtn').prop('disabled', false)
+		else
+			$('#reservarBtn').prop('disabled', true)
+	}
+
+</script>-->

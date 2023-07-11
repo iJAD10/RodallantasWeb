@@ -1,0 +1,46 @@
+﻿@model Web_Roda_Llantas.Entities.VehiculosEntities
+@{
+    ViewData["Tittle"] = "RegistrarVehiculos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Crear Vehiculo</h4>
+
+                @using (Html.BeginForm("RegistrarVehiculos", "Vehiculos", FormMethod.Post, new { @class = "forms-sample" }))
+                {
+                    @Html.HiddenFor(m => m.Veh_Id)
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Agregue la marca de su vehículo</label>
+                            @Html.TextBoxFor(m => m.Veh_Marca, new { @class="form-control form-control-sm", @required = true
+                         })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Agregue el modelo de su vehículo</label>
+                            @Html.TextBoxFor(m => m.Veh_Modelo, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el modelo de su carro" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Agregue la placa de su vehículo</label>
+                            @Html.TextBoxFor(m => m.Veh_Placa, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese la placa de su carro" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Agregue el año de su vehiculo</label>
+                            @Html.TextBoxFor(m => m.Veh_Fecha_Lanzamiento, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese la fecha de lanzamiento de su carro" })
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary mr-2" value="Crear Vehiculo">
+                }
+            </div>
+        </div>
+    </div>
+</div>

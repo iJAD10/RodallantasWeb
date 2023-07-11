@@ -1,0 +1,42 @@
+﻿@model Web_Roda_Llantas.Entities.ServiciosEntities
+@{
+    ViewData["Tittle"] = "ActualizarServicios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Actualizar Servicios</h4>
+
+                @using (Html.BeginForm("ActualizarServicios", "Servicios", FormMethod.Post, new { @class = "forms-sample" }))
+                {
+                    @Html.HiddenFor(m => m.Ser_Id)
+
+                    <div class="row">
+                       <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Id del Servicio </label>
+                            @Html.TextBoxFor(m => m.Ser_Id, new { @class="form-control form-control-sm", @required = true,
+                        @readOnly = true })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Monto del Servicio</label>
+                            @Html.TextBoxFor(m => m.Ser_Monto, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el monto del servicio" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Nombre del Servicio</label>
+                            @Html.TextBoxFor(m => m.Ser_Nombre, new{ @class="form-control form-control-sm",
+                        @type="Modelo", @placeholder="Ingrese el nombre del servicio" })
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary mr-2" value="Actualizar Servicio">
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

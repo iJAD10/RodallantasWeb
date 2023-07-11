@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Web_Roda_Llantas.Entities.UsuarioEntities>
+
+@{
+    ViewData["Title"] = "Consulta de Usuarios";
+    var usuario = Context.Session.GetString("Correo")?.ToString();
+}
+
+<div class="col-lg-12 stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Usuarios</h4>
+            <div class="table-responsive pt-3">
+                <table id="TablaUsuarios" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> Id </th>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Usu_Id</td>
+                                <td>@item.Usu_Cedula</td>
+                                <td>@item.Usu_Nombre</td>
+                                <td>@item.Usu_Correo</td>
+                                <td>@(item.Usu_Estado ? "Activo" : "Inactivo")</td>
+                                <td>
+                                    <a href="@Url.Action("ActualizarUsuario", "Usuarios", new { q = item.Usu_Id })">Actualizar</a>
+                                    <a href="" onclick="InactivarUsuario(@item.Usu_Id);">Cambiar Estado</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

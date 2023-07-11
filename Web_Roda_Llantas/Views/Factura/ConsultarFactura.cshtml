@@ -1,0 +1,46 @@
+﻿@model Web_Roda_Llantas.Entities.FacturaEntities
+@{
+    ViewData["Tittle"] = "Factura";
+    var usuario = Context.Session.GetString("Correo")?.ToString();
+}
+
+
+<div style="padding-left:300px;padding-right:300px" class="col-lg-12 stretch-card">
+    <div class="card">
+        <div class="card-body">
+           <div>
+               <h3>Fecha: @Model.Fac_Fecha</h3>
+           </div>
+                
+           <div>
+               <h3>Usuario: @Context.Session.GetString("Nombre")?.ToString()</h3>
+           </div>
+           
+                
+           <div>
+               <h3>Id de la factura: @Model.Fac_Id </h3>
+           </div>
+           
+                
+           <div>
+               <h3>Productos:</h3>
+               
+               @foreach(var item in @Model.ListaProductos ){
+                   <h3>@item.Prod_Marca     x @item.Prod_Cantidad</h3>
+               }
+               </div>
+           </div>
+
+
+            
+        <div style="padding-left:800px" >
+         <a class="text-white btn btn-block btn-primary font-weight-xs mt-4" href="@Url.Action("Principal","Home")">Regresar al inicio</a>
+         </div>
+    </div>
+            
+
+                
+
+</div>
+
+<script src="~/js/FuncionesCarrito.js"></script>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Web_Roda_Llantas.Entities.ServiciosEntities>
+
+@{
+    ViewData["Title"] = "Consulta de Servicios";
+}
+
+<div class="col-lg-12 stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Servicios</h4>
+            <div class="table-responsive">
+                <a href="@Url.Action("RegistrarServicios","Servicios")" class="btn btn-primary btn-nuevo-servicio">Nuevo Servicio</a>
+
+                <table id="TablaServicios" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Monto</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Ser_Id</td>
+                                <td>@item.Ser_Monto</td>
+                                <td>@item.Ser_Nombre</td>
+                                <td>
+                                    <a href="@Url.Action("ActualizarServicios", "Servicios", new { q = item.Ser_Id })">Actualizar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
