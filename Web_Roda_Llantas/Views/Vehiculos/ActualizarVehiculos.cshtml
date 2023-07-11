@@ -11,7 +11,7 @@
             <div class="card-body">
                 <h4 class="card-title">Actualizar Vehiculos</h4>
 
-                @using (Html.BeginForm("ActualizarVehiculo", "Vehiculos", FormMethod.Post, new { @class = "forms-sample" }))
+                @using (Html.BeginForm("ActualizarVehiculos", "Vehiculos", FormMethod.Post, new { @class = "forms-sample" }))
                 {
                     @Html.HiddenFor(m => m.Veh_Id)
 
