@@ -9,6 +9,7 @@
         public string Usu_Clave { get; set; } = string.Empty;
         public bool Usu_Estado { get; set; }
         public string Token { get; set; } = string.Empty;
-       
-    }
+		public int UR_Rol_Id { get; set; }
+
+	}
 }

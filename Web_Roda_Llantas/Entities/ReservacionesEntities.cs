@@ -8,7 +8,7 @@
 		public int? Res_Usuario_Id { get; set; }
         public List<string>? ServiciosReservados { get; set; }
         public List<string>? FechasServiciosReservados { get; set; }
-        public int? Veh_Id { get; set; }
+        public string Veh_Id { get; set; }
 		//Se usa para el envío de correos
 		public string? Usuario_Correo { get; set; }
 		//Se usan para ver los detalles de la reservación y no solo los id

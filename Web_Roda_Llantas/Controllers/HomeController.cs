@@ -55,35 +55,80 @@ namespace Web_Roda_Llantas.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Principal(UsuarioEntities entidad)
-        {
-            try
-            {
-                var resultado = _usuarioModel.ValidarCredenciales(entidad);
-
-                if (resultado != null)
-                {
-                    HttpContext.Session.SetString("Nombre", resultado.Usu_Nombre);
-                    HttpContext.Session.SetString("Correo", resultado.Usu_Correo);
-                    HttpContext.Session.SetString("Token", resultado.Token);
-                    HttpContext.Session.SetString("Usu_Id", resultado.Usu_Id.ToString());
-                    return RedirectToAction("Principal", "Home");
-                }
-                else
-                {
-                    Alert("Error de validación.", "Por favor verifique sus credenciales.", NotificationType.error);
-                    return View("Index");
-                }
-            }
-            catch (Exception ex)
-            {
-                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, 0);
-                return View("Error");
-            }
-        }
-
         [HttpGet]
+        [FiltroValidaSesion]
+        public ActionResult PrincipalCliente() { return View(); }
+
+		//[HttpPost]
+		//public IActionResult Principal(UsuarioEntities entidad)
+		//{
+		//    try
+		//    {
+		//        var resultado = _usuarioModel.ValidarCredenciales(entidad);
+
+		//        if (resultado != null)
+		//        {
+		//            HttpContext.Session.SetString("Nombre", resultado.Usu_Nombre);
+		//            HttpContext.Session.SetString("Correo", resultado.Usu_Correo);
+		//            HttpContext.Session.SetString("Token", resultado.Token);
+		//            HttpContext.Session.SetString("Usu_Id", resultado.Usu_Id.ToString());
+		//            return RedirectToAction("Principal", "Home");
+		//        }
+		//        else
+		//        {
+		//            Alert("Error de validación.", "Por favor verifique sus credenciales.", NotificationType.error);
+		//            return View("Index");
+		//        }
+		//    }
+		//    catch (Exception ex)
+		//    {
+		//        _utilitariosModel.RegistrarBitacora(ex, ControllerContext, 0);
+		//        return View("Error");
+		//    }
+		//}
+
+		[HttpPost]
+		public IActionResult Principal(UsuarioEntities entidad)
+		{
+			try
+			{
+				var resultado = _usuarioModel.ValidarCredenciales(entidad);
+
+				if (resultado != null)
+				{
+					HttpContext.Session.SetString("Nombre", resultado.Usu_Nombre);
+					HttpContext.Session.SetString("Correo", resultado.Usu_Correo);
+					HttpContext.Session.SetString("Token", resultado.Token);
+					HttpContext.Session.SetString("Usu_Id", resultado.Usu_Id.ToString());
+
+					if (resultado.UR_Rol_Id == 1) // Si el usuario es administrador
+					{
+						return RedirectToAction("Principal", "Home");
+					}
+					else if (resultado.UR_Rol_Id == 2) // Si el usuario es cliente
+					{
+						return RedirectToAction("PrincipalCliente", "Home");
+					}
+					// Añade un mensaje para los casos en los que Rol_Id no sea ni 1 ni 2
+					else
+					{
+						Alert("Error de validación.", "Rol de usuario no reconocido.", NotificationType.error);
+					}
+				}
+				else
+				{
+					Alert("Error de validación.", "Por favor verifique sus credenciales.", NotificationType.error);
+				}
+			}
+			catch (Exception ex)
+			{
+				_utilitariosModel.RegistrarBitacora(ex, ControllerContext, 0);
+			}
+			// Si ninguna de las condiciones anteriores se cumple, regresa a la vista de inicio
+			return View("Index");
+		}
+
+		[HttpGet]
         [FiltroValidaSesion]
         public IActionResult CerrarSesion()
         {

@@ -116,10 +116,10 @@
                         </a>
                         <div class="collapse" id="productos">
                             <ul class="nav flex-column sub-menu">
-                                @foreach(var item in @ViewBag.OpcionesProductos )
-                                {
-                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarProductos","Productos", new { Prod_Id = item.TP_Nombre })">@item.TP_Nombre</a></li>
-                                }
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarProductos", "Productos")">Consultar</a></li>
+                            </ul>
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("RegistrarProductos", "Productos")">Registrar</a></li>
                             </ul>
                         </div>
                     </li>
@@ -174,7 +174,7 @@
     }
 
     <script src="~/js/main.js"></script>
-    
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>

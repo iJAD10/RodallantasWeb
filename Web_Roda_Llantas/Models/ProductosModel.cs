@@ -81,15 +81,19 @@ namespace Web_Roda_Llantas.Models
         {
             using (var client = new HttpClient())
             {
+                string token = _contextAccessor.HttpContext.Session.GetString("Token").ToString();
                 string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Productos/RegistrarProductos";
 
                 JsonContent body = JsonContent.Create(entidad);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 HttpResponseMessage response = client.PostAsync(urlApi, body).Result;
 
                 if (response.IsSuccessStatusCode)
                     return response.Content.ReadFromJsonAsync<int>().Result;
+
                 if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                     throw new Exception("Excepción Web Api: " + response.Content.ReadAsStringAsync().Result);
+
                 return 0;
             }
         }

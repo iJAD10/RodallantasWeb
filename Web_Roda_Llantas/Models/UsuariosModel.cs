@@ -16,24 +16,24 @@ namespace Web_Roda_Llantas.Models
             _contextAccessor = contextAccessor;
         }
 
-        public UsuarioEntities? ValidarCredenciales(UsuarioEntities entidad)
-        {
-            using (var client = new HttpClient())
+            public UsuarioEntities? ValidarCredenciales(UsuarioEntities entidad)
             {
-                string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Login/ValidarCredenciales";
+                using (var client = new HttpClient())
+                {
+                    string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Login/ValidarCredenciales";
 
-                JsonContent body = JsonContent.Create(entidad);
-                HttpResponseMessage response = client.PostAsync(urlApi, body).Result;
+                    JsonContent body = JsonContent.Create(entidad);
+                    HttpResponseMessage response = client.PostAsync(urlApi, body).Result;
 
-                if (response.IsSuccessStatusCode)
-                    return response.Content.ReadFromJsonAsync<UsuarioEntities>().Result;
+                    if (response.IsSuccessStatusCode)
+                        return response.Content.ReadFromJsonAsync<UsuarioEntities>().Result;
 
-                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-                    throw new Exception("Excepción web Api: " + response.Content.ReadAsStringAsync().Result);
+                    if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                        throw new Exception("Excepción web Api: " + response.Content.ReadAsStringAsync().Result);
 
-                return null;
+                    return null;
+                }
             }
-        }
 
 
         public List<UsuarioEntities>? ConsultarUsuarios()

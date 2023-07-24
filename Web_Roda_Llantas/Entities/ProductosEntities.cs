@@ -10,5 +10,6 @@
         public int Prod_Proveedor_Id { get; set; }
         public int Prod_TipoProducto_Id { get; set; }
         public int Prod_Cantidad { get; set; } = 0;
-    }
+		public string Prod_Url_Img { get; set; }
+	}
 }
