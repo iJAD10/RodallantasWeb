@@ -20,6 +20,26 @@ namespace Web_Roda_Llantas.Controllers
             _utilitariosModel = utilitariosModel;
         }
 
+
+
+        [HttpPost]
+        public IActionResult RegistrarVehiculos(VehiculosEntities entidad)
+        {
+            try
+            {
+
+                var datos = _vehiculosModel.RegistrarVehiculos(entidad);
+                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+                return View(datos);
+            }
+            catch (Exception ex)
+            {
+                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+                return View("Error");
+            }
+        }
+
         [HttpGet]
         public IActionResult ConsultarVehiculos()
         {
@@ -55,24 +75,6 @@ namespace Web_Roda_Llantas.Controllers
             }
         }
 
-      
-        [HttpPost]
-        public IActionResult RegistrarVehiculos(VehiculosEntities entidad)
-        {
-            try
-            {
-                
-                var datos = _vehiculosModel.RegistrarVehiculos(entidad);
-                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-                return View(datos);
-            }
-            catch (Exception ex)
-            {
-                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
-                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-                return View("Error");
-            }
-        }
 
         [HttpGet]
         public IActionResult ActualizarVehiculos(long q)

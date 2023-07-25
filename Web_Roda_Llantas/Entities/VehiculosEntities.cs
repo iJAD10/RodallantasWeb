@@ -1,4 +1,6 @@
-﻿namespace Web_Roda_Llantas.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Web_Roda_Llantas.Entities
 {
     public class VehiculosEntities 
     {

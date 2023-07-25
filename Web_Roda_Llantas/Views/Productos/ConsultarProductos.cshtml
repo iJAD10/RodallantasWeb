@@ -6,9 +6,13 @@
 
 <h1>ConsultarProductos</h1>
 
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
+<a href="@Url.Action("RegistrarProductos","Productos")"
+class="btn btn-primary btn-nuevo-servicio">Nuevo Producto</a>
+
+
 <table class="table">
     <thead>
         <tr>
