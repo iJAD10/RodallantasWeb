@@ -1,83 +1,53 @@
 ﻿@model IEnumerable<Web_Roda_Llantas.Entities.ProductosEntities>
 
 @{
-    ViewData["Title"] = "ConsultarProductos";
+    ViewData["Title"] = "Consultar Productos";
+    var usuario = Context.Session.GetString("Correo")?.ToString();
 }
 
-<h1>ConsultarProductos</h1>
+<div class="col-lg-12 stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Productos</h4>
+            <div class="table-responsive">
+                <a href="@Url.Action("RegistrarProductos","Productos")" class="btn btn-primary btn-nuevo-producto">Nuevo Producto</a>
+                <table id="TablaProductos" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Marca</th>
+                            <th>Precio</th>
+                            <th>Total</th>
+                            <th>Cantidad en Stock</th>
+                            <th>Nombre del Proveedor</th> <!-- nueva columna -->
+                            <th>Tipo de Producto</th> <!-- nueva columna -->
+                            <th>Imagen</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Prod_Id</td>
+                                <td>@item.Prod_Marca</td>
+                                <td>@item.Prod_Precio</td>
+                                <td>@item.Prod_total</td>
+                                <td>@item.Prod_CantStock</td>
+                                <td>@item.Prov_Nombre_Agente</td> <!-- nueva celda -->
+                                <td>@item.TP_Nombre</td> <!-- nueva celda -->
+                                <td><img src="@item.Prod_Url_Img" alt="Product Image" width="300" height="300"></td>
+                                <td>
+                                    <a href="@Url.Action("Editar", "Productos", new { id = item.Prod_Id })">Editar</a> |
+                                    <a href="@Url.Action("Detalles", "Productos", new { id = item.Prod_Id })">Detalles</a> |
+                                    <a href="@Url.Action("Eliminar", "Productos", new { id = item.Prod_Id })">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_Marca)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_Precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_CantStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_Proveedor_Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_TipoProducto_Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_Cantidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prod_Url_Img)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_Marca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_CantStock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_Proveedor_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_TipoProducto_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_Cantidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prod_Url_Img)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

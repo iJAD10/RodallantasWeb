@@ -78,14 +78,39 @@ namespace Web_Roda_Llantas.Controllers
             return Json(_proveedoresModel.InactivarProveedor(entidad));
         }
 
+        //[HttpPost]
+        //public IActionResult RegistrarProveedores(ProveedoresEntities entidad)
+        //{
+        //    try
+        //    {
+        //        var datos = _proveedoresModel.RegistrarProveedores(entidad);
+        //        ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+        //        return View(datos);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+        //        _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+        //        return View("Error");
+        //    }
+        //}
+
         [HttpPost]
         public IActionResult RegistrarProveedores(ProveedoresEntities entidad)
         {
             try
             {
-                var datos = _proveedoresModel.RegistrarProveedores(entidad);
+                var resultado = _proveedoresModel.RegistrarProveedores(entidad);
                 ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-                return View(datos);
+
+                if (resultado > 0)
+                {
+                    return RedirectToAction("ConsultarProveedores", "Proveedores");
+                }
+                else
+                {
+                    return RedirectToAction("RegistrarProveedores", "Proveedores");
+                }
             }
             catch (Exception ex)
             {

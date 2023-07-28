@@ -19,7 +19,9 @@ namespace Web_Roda_Llantas.Models
         {
             using (var client = new HttpClient())
             {
-                string urlApi = _configuration.GetSection("apiUrl:Proveedores").Value + "Proveedores/RegistrarProveedores";
+                string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Proveedores/RegistrarProveedores";
+                string token = _contextAccessor.HttpContext.Session.GetString("Token").ToString();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                 JsonContent body = JsonContent.Create(entidad);
                 HttpResponseMessage response = client.PostAsync(urlApi, body).Result;
@@ -107,5 +109,26 @@ namespace Web_Roda_Llantas.Models
             }
         }
 
+        public List<ProveedoresEntities>? ConsultarProveedorXNombre()
+        {
+            using (var client = new HttpClient())
+            {
+                string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Proveedores/ConsultarProveedorXNombre";
+
+                string token = _contextAccessor.HttpContext.Session.GetString("Token").ToString();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                HttpResponseMessage response = client.GetAsync(urlApi).Result;
+
+                if (response.IsSuccessStatusCode)
+                    return response.Content.ReadFromJsonAsync<List<ProveedoresEntities>>().Result;
+
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    throw new Exception("Excepción Web Api: " + response.Content.ReadAsStringAsync().Result);
+
+                return new List<ProveedoresEntities>();
+            }
+        }
+
+    
     }
 }

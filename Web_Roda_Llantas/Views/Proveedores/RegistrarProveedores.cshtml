@@ -16,11 +16,6 @@
                     @Html.HiddenFor(m => m.Prov_Id)
 
                     <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputEmail1">Ingrese el Apellido del Agente</label>
-                            @Html.TextBoxFor(m => m.Prov_Apellido_Agente, new { @class="form-control form-control-sm", @required = true
-                        , @placeholder="Ingrese el Apellido del Agente" })
-                        </div>
 
                         <div class="form-group col-md-6">
                             <label for="exampleInputEmail1">Ingrese el Nombre del Agente</label>
@@ -46,16 +41,11 @@
                         @type="Modelo", @placeholder="Ingrese el Telefono del Agente" })
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputEmail1">Ingrese el Telefono Fijo de la Empresa</label>
-                            @Html.TextBoxFor(m => m.Prov_Telefono_Fijo, new{ @class="form-control form-control-sm",
-                        @type="Modelo", @placeholder="Ingrese el Telefono Fijo de la Empresa" })
-                        </div>
 
                         <div class="form-group col-md-6">
-                            <label for="exampleInputEmail1">Ingrese el Telefono Fijo de la Empresa</label>
-                            @Html.TextBoxFor(m => m.Prov_Telefono_Fijo, new{ @class="form-control form-control-sm",
-                        @type="Modelo", @placeholder="Ingrese el Telefono Fijo de la Empresa" })
+                            <label for="exampleInputEmail1">Ingrese nombre de la empresa</label>
+                            @Html.TextBoxFor(m => m.Prov_Nombre_Empresa, new { @class="form-control form-control-sm", @required = true
+                        , @placeholder="Ingrese nombre de la empresa" })
                         </div>
 
                     </div>

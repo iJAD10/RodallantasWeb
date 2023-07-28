@@ -10,6 +10,6 @@ namespace Web_Roda_Llantas.Interfaces
 
         public void ActualizarProductos(ProductosEntities entidad);
 
-        public int RegistrarProductos(ProductosEntities entidad);
+        public int RegistrarProductos(ProductosRegistrarEntities entidad);
     }
 }

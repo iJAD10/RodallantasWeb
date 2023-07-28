@@ -61,10 +61,17 @@ namespace Web_Roda_Llantas.Controllers
         {
             try
             {
-                
-                var datos = _vehiculosModel.RegistrarVehiculos(entidad);
+                var resultado = _vehiculosModel.RegistrarVehiculos(entidad);
                 ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-                return View(datos);
+
+                if (resultado > 0)
+                {
+                    return RedirectToAction("ConsultarVehiculos", "Vehiculos");
+                }
+                else
+                {
+                    return RedirectToAction("RegistrarVehiculos", "Vehiculos");
+                }
             }
             catch (Exception ex)
             {

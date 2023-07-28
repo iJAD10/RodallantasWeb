@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Web_Roda_Llantas.Entities;
 using Web_Roda_Llantas.Interfaces;
 using Web_Roda_Llantas.Models;
@@ -12,24 +13,22 @@ namespace Web_Roda_Llantas.Controllers
 		private readonly IProductosModel _productosModel;
 		private readonly ITipoProductoModel _tipoProductoModel;
 		private readonly IUtilitariosModel _utilitariosModel;
+        private readonly IProveedoresModel _proveedoresModel;
 
-
-
-
-
-		private static string _tipoProducto;
-
-		public ProductosController(IProductosModel productosModel, ITipoProductoModel tipoProductoModel, IUtilitariosModel utilitariosModel)
+		public ProductosController(IProductosModel productosModel, ITipoProductoModel tipoProductoModel, IUtilitariosModel utilitariosModel, IProveedoresModel proveedoresModel)
 
 		{
 			_productosModel = productosModel;
 			_tipoProductoModel = tipoProductoModel;
 			_utilitariosModel = utilitariosModel;
+            _proveedoresModel = proveedoresModel;
 
-		}
 
-        [HttpPost]
-        public IActionResult RegistrarProductos(ProductosEntities entidad)
+
+        }
+
+		[HttpPost]
+        public IActionResult RegistrarProductos(ProductosRegistrarEntities entidad)
         {
             try
             {
@@ -58,9 +57,9 @@ namespace Web_Roda_Llantas.Controllers
 		{
 			try
 			{
-
-				ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-				return View();
+                ViewBag.OpcionesProveedores = new SelectList(_proveedoresModel.ConsultarProveedorXNombre(), "Prov_Id", "Prov_Nombre_Empresa");
+                ViewBag.OpcionesProductos = new SelectList(_tipoProductoModel.ConsultarTipoProducto(), "TP_Id", "TP_Nombre");
+                return View();
 			}
 			catch (Exception ex)
 			{

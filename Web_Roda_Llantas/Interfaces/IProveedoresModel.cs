@@ -9,5 +9,6 @@ namespace Web_Roda_Llantas.Interfaces
         public List<ProveedoresEntities>? ConsultarProveedores();
         public ProveedoresEntities? ConsultarProveedor(long q);
         public int InactivarProveedor(ProveedoresEntities entidad);
+        public List<ProveedoresEntities>? ConsultarProveedorXNombre();
     }
 }

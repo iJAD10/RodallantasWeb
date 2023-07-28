@@ -77,7 +77,7 @@ namespace Web_Roda_Llantas.Models
                 return new List<ProductosEntities>();
             }
         }
-        public int RegistrarProductos(ProductosEntities entidad)
+        public int RegistrarProductos(ProductosRegistrarEntities entidad)
         {
             using (var client = new HttpClient())
             {
@@ -112,5 +112,7 @@ namespace Web_Roda_Llantas.Models
                 HttpResponseMessage response = client.PutAsync(urlApi, body).Result;
             }
         }
+
+       
     }
 }

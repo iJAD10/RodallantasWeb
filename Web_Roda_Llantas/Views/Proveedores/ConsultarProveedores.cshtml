@@ -13,12 +13,10 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Apellido</th>
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>DIreccion</th>
                     <th>Telefono</th>
-                    <th>Telefono Fijo</th>
                     <th>Empresa</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -30,12 +28,10 @@
                 {
                     <tr>
                         <td>@item.Prov_Id</td>
-                        <td>@item.Prov_Apellido_Agente</td>
                         <td>@item.Prov_Nombre_Agente</td>
                         <td>@item.Prov_Correo</td>
                         <td>@item.Prov_Direccion</td>
                         <td>@item.Prov_Telefono</td>
-                        <td>@item.Prov_Telefono_Fijo</td>
                         <td>@item.Prov_Nombre_Empresa</td>
                         <td> @(item.Prov_Estado ? "Activo" : "Inactivo") </td>
                         <td>
