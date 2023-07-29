@@ -19,6 +19,24 @@ namespace Web_Roda_Llantas.Controllers
         }
 
         [HttpPost]
+        public IActionResult RegistrarProveedores(ProveedoresEntities entidad)
+        {
+            try
+            {
+                
+               var datos = _proveedoresModel.RegistrarProveedores(entidad);
+                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+              return View(datos);
+            }
+            catch (Exception ex)
+            {
+                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+               _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+               return View("Error");
+            }
+        }
+
+        [HttpPost]
         public IActionResult ActualizarProveedores(ProveedoresEntities entidad)
         {
             try

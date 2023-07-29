@@ -9,7 +9,8 @@
         <div class="card-body">
             <h4 class="card-title">Servicios</h4>
             <div class="table-responsive">
-                <a href="@Url.Action("RegistrarServicios","Servicios")" class="btn btn-primary btn-nuevo-servicio">Nuevo Servicio</a>
+                <a href="@Url.Action("RegistrarServicios","Servicios")" 
+                class="btn btn-primary btn-nuevo-servicio">Nuevo Servicio</a>
 
                 <table id="TablaServicios" class="table table-striped">
                     <thead>
@@ -28,7 +29,8 @@
                                 <td>@item.Ser_Monto</td>
                                 <td>@item.Ser_Nombre</td>
                                 <td>
-                                    <a href="@Url.Action("ActualizarServicios", "Servicios", new { q = item.Ser_Id })">Actualizar</a>
+                                    <a href="@Url.Action("ActualizarServicios", "Servicios",
+                                    new { q = item.Ser_Id })">Actualizar</a>
                                 </td>
                             </tr>
                         }
