@@ -40,11 +40,11 @@ html {
 }
 
 body {
-     color: #666666;
-     font-size: 14px;
-     font-family: 'Raleway', sans-serif;
-     line-height: 1.80857;
-     font-weight: normal;
+    color: #000000;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.80857;
+    font-weight: normal;
 }
 
 a {
@@ -64,18 +64,18 @@ h3,
 h4,
 h5,
 h6 {
-     letter-spacing: 0;
-     font-weight: normal;
-     position: relative;
-     padding: 0 0 10px 0;
-     font-weight: normal;
-     line-height: normal;
-     color: #111111;
-     margin: 0
+    letter-spacing: 0;
+    font-weight: normal;
+    position: relative;
+    padding: 0 0 10px 0;
+    font-weight: normal;
+    line-height: normal;
+    color: #e5fe44;
+    margin: 0
 }
 
 h1 {
-     font-size: 24px;
+     font-size: 80px;
 }
 
 h2 {
@@ -112,7 +112,7 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-     color: #212121;
+     color: #21211;
      text-decoration: none!important;
      opacity: 1
 }
@@ -329,14 +329,14 @@ ul.btn li:last-child {
 
 .navigation.navbar-dark .navbar-nav .nav-link:focus,
 .navigation.navbar-dark .navbar-nav .nav-link:hover {
-     color: #51fe44;
+     color: #e5fe44
 }
 
 .navigation.navbar-dark .navbar-nav .active>.nav-link,
 .navigation.navbar-dark .navbar-nav .nav-link.active,
 .navigation.navbar-dark .navbar-nav .nav-link.show,
 .navigation.navbar-dark .navbar-nav .show>.nav-link {
-     color: #51fe44;
+     color: #e5fe44;
 }
 
 .navbar-expand-md .navbar-nav {
@@ -366,7 +366,7 @@ ul.btn li:last-child {
      width: 100%;
      padding: 20px 30px;
      border-bottom: #000 solid 20px;
-     background-image: linear-gradient(to bottom, #1559b7, #4f7af3);
+     background-image: linear-gradient(to bottom, #b5b715, #000);
 }
 
 .logo a {
@@ -381,7 +381,7 @@ ul.btn li:last-child {
 /** banner section **/
 
 .banner_main {
-     background: url(../images/banner.jpg);
+     background: url(banner.jpg);
      background-repeat: no-repeat;
      min-height: 700px;
      background-size: 100% 100%;
@@ -398,7 +398,7 @@ ul.btn li:last-child {
 
 .text-bg h1 {
      text-transform: uppercase;
-     color: #51fe44;
+     color: #e5fe44
      font-size: 90px;
      line-height: 80px;
      padding-bottom: 35px;
@@ -545,7 +545,7 @@ ul.btn li:last-child {
 }
 
 .read_more:hover {
-     background: #51fe44;
+     background: #e5fe44
      color: #fff;
      transition: ease-in all 0.5s;
 }
@@ -689,7 +689,7 @@ ul.btn li:last-child {
 }
 
 .blu {
-     color: #51fe44;
+     color: #e5fe44
      font-size: 17px;
      line-height: 28px;
      font-weight: 600;
@@ -783,7 +783,7 @@ ul.btn li:last-child {
 }
 
 .testimonial_Carousel .carousel-indicators li.active {
-     background: #51fe44;
+     background: #e5fe44
 }
 
 #myCarousel .carousel-control-next-icon,
@@ -798,7 +798,7 @@ ul.btn li:last-child {
 /** footer **/
 
 .footer {
-     background: #141629;
+     background: #030303;
      padding-top: 85px;
      text-align: center;
 }
