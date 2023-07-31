@@ -8,5 +8,6 @@ namespace Web_Roda_Llantas.Interfaces
 		public List<ReservacionesEntities>? ConsultarReservaciones();
 		public List<ReservacionesEntities>? DetallesReservacion(long q);
 		public int CambiarCompletado(ReservacionesEntities entidad);
-	}
+        public int RegistrarVehiculoYReservacion(ReservacionesEntities entidad);
+    }
 }

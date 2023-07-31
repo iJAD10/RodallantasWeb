@@ -15,7 +15,7 @@ namespace Web_Roda_Llantas.Models
 			_configuration = configuration;
 			_contextAccessor = contextAccessor;
 		}
-		
+
 		public int RegistrarReservacion(ReservacionesEntities entidad)
 		{
 			using (var client = new HttpClient())
@@ -33,7 +33,23 @@ namespace Web_Roda_Llantas.Models
 				return 0;
 			}
 		}
+		public int RegistrarVehiculoYReservacion(ReservacionesEntities entidad)
+		{
+			using (var client = new HttpClient())
+			{
+				string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Reservaciones/RegistrarVehiculoYReservacion";
+				string token = _contextAccessor.HttpContext.Session.GetString("Token").ToString();
+				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+				JsonContent body = JsonContent.Create(entidad);
+				HttpResponseMessage response = client.PostAsync(urlApi, body).Result;
 
+				if (response.IsSuccessStatusCode)
+					return response.Content.ReadFromJsonAsync<int>().Result;
+				if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+					throw new Exception("Excepción Web Api: " + response.Content.ReadAsStringAsync().Result);
+				return 0;
+			}
+		}
 		public List<ReservacionesEntities>? ConsultarReservaciones()
 		{
 			using (var client = new HttpClient())

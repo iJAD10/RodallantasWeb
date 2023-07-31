@@ -1,0 +1,108 @@
+﻿@model Web_Roda_Llantas.Entities.ReservacionesEntities
+
+@{
+    ViewData["Title"] = "RegistrarVehiculoYReservacion";
+     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<style>
+	#reservarServicios {
+		display: none
+	}
+
+	.container {
+		text-align: center;
+	}
+</style>
+<div class="card">
+	<div class="card-body">
+<div class="row">
+
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				@if (@ViewBag.mensaje != null)
+				{
+					<p>***@ViewBag.mensaje***</p>
+
+					<br />
+					<hr />
+
+				}
+
+				<h2 class="card-title">Reservar Servicios</h2>
+
+				@using (Html.BeginForm("RegistrarVehiculoYReservacion", "Reservaciones", FormMethod.Post, new { @class = "forms-sample" }))
+				{
+					<input name="Res_Usuario_Id" value="@Context.Session.GetString("Usu_Id")?.ToString()" style="display: none">
+
+					<fieldset id="vehiculo">
+						<legend>Indique la información de su vehículo:</legend>
+						<hr />
+
+								<div class="row">
+									<div class="col-sm-12 col-md-6">
+										<div class="form-group">
+											<label for="placa">Placa:</label>
+											@Html.TextBoxFor(m => m.Veh_Id, new { @class = "form-control", @required = true })
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="form-group">
+											<label for="Veh_Marca">Marca:</label>
+											@Html.TextBoxFor(m => m.Veh_Marca, new { @class = "form-control", @required = true })
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="form-group">
+											<label for="Veh_Modelo">Modelo:</label>
+											@Html.TextBoxFor(m => m.Veh_Modelo, new { @class = "form-control", @required = true })
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="form-group">
+											<label for="Veh_Fecha_Lanzamiento">Fecha Lanzamiento:</label>
+											@Html.TextBoxFor(m => m.Veh_Fecha_Lanzamiento, new { @class = "form-control", @required = true })
+										</div>
+									</div>
+								</div>
+						<hr />
+					</fieldset>
+
+				/*<p id="Usuario_Correo">@Context.Session.GetString("Correo")?.ToString()</p>*/
+					<input name="Usuario_Correo" id="Usuario_Correo" value="@Context.Session.GetString("Correo")?.ToString()" hidden />
+
+					<fieldset id="Servicios">
+						<legend>Seleccione los servicios:</legend>
+						<hr />
+
+						@foreach (var item in ViewBag.Servicios)
+						{
+							<div class="row" style="padding-left: 30px">
+								<div class="col-6" style="font-size: large">
+									<input type="checkbox" name="ServiciosReservados" value="@item.Ser_Id" onchange="mostrarFecha(this)"> @item.Ser_Nombre <br>
+								</div>
+								<div class="col-4" style="display: none">
+									<label for="FechasServiciosReservados"> Fecha: </label>
+									<input type="date" id="FechasServiciosReservados" name="FechasServiciosReservados" onchange="">
+								</div>
+							</div>
+							<hr>
+							
+						}
+
+						<div class="container"> <input type="submit" class="btn btn-primary mr-2" value="Reservar" style="width: 300px" > </div>
+						<p style="text-align: center; font-size: small; color: gray;">*Se debe seleccionar al menos un servicio y su fecha</p>
+					</fieldset>
+				}
+						<hr>
+						<br>
+						<br>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<script src="~/js/FuncionesReservacion.js"></script>

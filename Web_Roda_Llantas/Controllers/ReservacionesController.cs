@@ -109,5 +109,44 @@ namespace Web_Roda_Llantas.Controllers
 			return Json(_reservacionesModel.CambiarCompletado(entidad));
 
 		}
-	}
+
+        //Cliente
+        [HttpGet]
+        public IActionResult RegistrarVehiculoYReservacion()
+        {
+            try
+            {
+                ViewBag.Servicios = _serviciosModel.ConsultarServicios();
+                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, 0);
+                return View("Error");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult RegistrarVehiculoYReservacion(ReservacionesEntities entidad)
+        {
+            try
+            {
+                var resultado = _reservacionesModel.RegistrarVehiculoYReservacion(entidad);
+                if (resultado > 0)
+                    ViewBag.mensaje = "Se registró su reservación de forma exitosa";
+                else
+                    ViewBag.mensaje = "No se pudo registrar la reservación";
+
+                return RegistrarVehiculoYReservacion();
+            }
+            catch (Exception ex)
+            {
+                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, 0);
+                ViewBag.mensaje = "No se pudo registrar la reservación";
+
+                return RegistrarReservacion();
+            }
+        }
+    }
 }
