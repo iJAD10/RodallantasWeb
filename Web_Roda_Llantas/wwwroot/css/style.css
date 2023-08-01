@@ -833,9 +833,9 @@ ul.location_icon li a {
      padding-right: 15px;
 }
 
-ul.location_icon li a:hover {
-     color: #00ff00;
-}
+    ul.location_icon li a:hover {
+        color: #e5fe44;
+    }
 
 .main_form {
      padding: 50px 0px 0px 0px;

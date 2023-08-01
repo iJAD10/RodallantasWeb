@@ -14,6 +14,10 @@
         height: 200px;
         object-fit: contain;
     }
+
+    .product-title {
+        color: black;
+    }
 </style>
 
 <div class="container">
@@ -25,10 +29,10 @@
                 <div class="card">
                     <img class="card-img-top product-img" src="@item.Prod_Url_Img" alt="Image of @item.Prod_Marca">
                     <div class="card-body">
-                        <h5 class="card-title">@item.Prod_Marca</h5>
-                        <p class="card-text">$@item.Prod_Precio</p>
-                        <a href="@Url.Action("Edit", "Productos", new { id = item.Prod_Id })" class="btn btn-primary">Agregar al carrito</a>
-                        <a href="@Url.Action("Details", "Productos", new { id = item.Prod_Id })" class="btn btn-secondary">Detalles</a>
+                        <h4 class="card-title product-title">@item.Prod_Marca</h4>
+                        <p class="card-text">₡@item.Prod_Precio</p>
+                        <a href="@Url.Action("Edit", "Productos", new { Id = item.Prod_Id })" class="btn btn-primary">Agregar al carrito</a>
+                        <a href="@Url.Action("ConsultarProductoXID", "Productos", new { Id = item.Prod_Id })" class="btn btn-secondary">Detalles</a>
                        @* <a href="@Url.Action("Delete", "Productos", new { id = item.Prod_Id })" class="btn btn-danger">Delete</a>*@
                     </div>
                 </div>

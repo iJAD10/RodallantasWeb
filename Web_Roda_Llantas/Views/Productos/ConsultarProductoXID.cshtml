@@ -1,0 +1,42 @@
+﻿@model Web_Roda_Llantas.Entities.ProductosEntities
+
+@{
+    ViewData["Title"] = "ConsultarProductoXID";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+<div class="container">
+    <hr />
+    <h1 class="color-dark">Detalles del producto:</h1>
+    <hr />
+    <div class="row">
+        
+        <div class="col-md-6">
+            <img src="@Html.DisplayFor(model => model.Prod_Url_Img)" class="img-fluid" alt="Imagen del Producto">
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                
+                <div class="card-body">
+                    <h1 class="card-title text-dark">@Html.DisplayFor(model => model.Prod_Marca)</h1>
+                    <h2 class="card-subtitle mb-2 text-dark">Precio: @Html.DisplayFor(model => model.Prod_Precio)</h2>
+                    @*<h3 class="card-text text-dark">Total: @Html.DisplayFor(model => model.Prod_total)</h3>*@
+                    <h3 class="card-text text-dark">Cantidad en Stock: @Html.DisplayFor(model => model.Prod_CantStock)</h3>
+                    <h3 class="card-text text-dark">Nombre del Proveedor: @Html.DisplayFor(model => model.Prov_Nombre_Agente)</h3>
+                    <h3 class="card-text text-dark">Tipo de Producto: @Html.DisplayFor(model => model.TP_Nombre)</h3>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+                    <a href="#" class="btn btn-secondary">Volver a productos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

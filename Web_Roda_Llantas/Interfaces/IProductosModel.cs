@@ -5,7 +5,7 @@ namespace Web_Roda_Llantas.Interfaces
     public interface IProductosModel
     {
         public List<ProductosEntities>? ConsultarProductos();
-        public ProductosEntities ConsultarProductoXID(int id_producto);
+        public ProductosEntities ConsultarProductoXID(int Id);
         public List<ProductosEntities>? ConsultarProductosXIDTipoProducto(string Prod_Id);
 
         public void ActualizarProductos(ProductosEntities entidad);

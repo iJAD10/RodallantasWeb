@@ -34,25 +34,23 @@ namespace Web_Roda_Llantas.Models
                 return new List<ProductosEntities>();
             }
         }
-        public ProductosEntities? ConsultarProductoXID(int Prod_Id)
+        public ProductosEntities ConsultarProductoXID(int Id)
         {
             using (var client = new HttpClient())
             {
-                string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Productos/ConsultarProductoXID";
-
-                //Serializar convertir un objeto a json
-                JsonContent body = JsonContent.Create(new TipoProductoEntities { TP_Id = Prod_Id });
+                string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Productos/ConsultarProductoXID?Id=" + Id;
 
                 string token = _contextAccessor.HttpContext.Session.GetString("Token").ToString();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                HttpResponseMessage response = client.PutAsync(urlApi, body).Result;
+                HttpResponseMessage response = client.GetAsync(urlApi).Result;
+
                 if (response.IsSuccessStatusCode)
                     return response.Content.ReadFromJsonAsync<ProductosEntities>().Result;
 
                 if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                     throw new Exception("Excepción Web Api: " + response.Content.ReadAsStringAsync().Result);
 
-                return new ProductosEntities();
+                return null;
             }
         }
 
