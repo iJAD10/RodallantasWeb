@@ -13,7 +13,7 @@ namespace Web_Roda_Llantas.Controllers
 		private readonly IProductosModel _productosModel;
 		private readonly ITipoProductoModel _tipoProductoModel;
 		private readonly IUtilitariosModel _utilitariosModel;
-        private readonly IProveedoresModel _proveedoresModel;
+		private readonly IProveedoresModel _proveedoresModel;
 
 		public ProductosController(IProductosModel productosModel, ITipoProductoModel tipoProductoModel, IUtilitariosModel utilitariosModel, IProveedoresModel proveedoresModel)
 
@@ -21,45 +21,28 @@ namespace Web_Roda_Llantas.Controllers
 			_productosModel = productosModel;
 			_tipoProductoModel = tipoProductoModel;
 			_utilitariosModel = utilitariosModel;
-            _proveedoresModel = proveedoresModel;
+			_proveedoresModel = proveedoresModel;
 
 
 
-        }
+		}
 
 		[HttpPost]
-        public IActionResult RegistrarProductos(ProductosRegistrarEntities entidad)
-        {
-            try
-            {
-                var resultado = _productosModel.RegistrarProductos(entidad);
-                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-
-                if (resultado > 0)
-                {
-                    return RedirectToAction("ConsultarProductos", "Productos");
-                }
-                else
-                {
-                    return RedirectToAction("RegistrarProductos", "Productos");
-                }
-            }
-            catch (Exception ex)
-            {
-                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
-                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-                return View("Error");
-            }
-        }
-
-        [HttpGet]
-		public IActionResult RegistrarProductos()
+		public IActionResult RegistrarProductos(ProductosRegistrarEntities entidad)
 		{
 			try
 			{
-                ViewBag.OpcionesProveedores = new SelectList(_proveedoresModel.ConsultarProveedorXNombre(), "Prov_Id", "Prov_Nombre_Empresa");
-                ViewBag.OpcionesProductos = new SelectList(_tipoProductoModel.ConsultarTipoProducto(), "TP_Id", "TP_Nombre");
-                return View();
+				var resultado = _productosModel.RegistrarProductos(entidad);
+				ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+
+				if (resultado > 0)
+				{
+					return RedirectToAction("ConsultarProductos", "Productos");
+				}
+				else
+				{
+					return RedirectToAction("RegistrarProductos", "Productos");
+				}
 			}
 			catch (Exception ex)
 			{
@@ -69,25 +52,42 @@ namespace Web_Roda_Llantas.Controllers
 			}
 		}
 
-        [HttpGet]
-        public IActionResult ConsultarProductos()
-        {
-            try
-            {
-                var datos = _productosModel.ConsultarProductos();
-                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+		[HttpGet]
+		public IActionResult RegistrarProductos()
+		{
+			try
+			{
+				ViewBag.OpcionesProveedores = new SelectList(_proveedoresModel.ConsultarProveedorXNombre(), "Prov_Id", "Prov_Nombre_Empresa");
+				ViewBag.OpcionesProductos = new SelectList(_tipoProductoModel.ConsultarTipoProducto(), "TP_Id", "TP_Nombre");
+				return View();
+			}
+			catch (Exception ex)
+			{
+				int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+				_utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+				return View("Error");
+			}
+		}
 
-                return View(datos);
-            }
-            catch (Exception ex)
-            {
-                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
-                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-                return View("Error");
-            }
-        }
+		[HttpGet]
+		public IActionResult ConsultarProductos()
+		{
+			try
+			{
+				var datos = _productosModel.ConsultarProductos();
+				ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
 
-        [HttpPost]
+				return View(datos);
+			}
+			catch (Exception ex)
+			{
+				int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+				_utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+				return View("Error");
+			}
+		}
+
+		[HttpPost]
 		public IActionResult ActualizarProductos(ProductosEntities entidad)
 		{
 			try
@@ -119,6 +119,25 @@ namespace Web_Roda_Llantas.Controllers
 			return RedirectToAction("ConsultarProductos", "Productos");
 		}
 
+		//Cliente
+
+		[HttpGet]
+		public IActionResult ConsultarProductosCliente()
+		{
+			try
+			{
+				var datos = _productosModel.ConsultarProductos();
+				ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+
+				return View(datos);
+			}
+			catch (Exception ex)
+			{
+				int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+				_utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+				return View("Error");
+			}
+		}
 	}
 
 }
