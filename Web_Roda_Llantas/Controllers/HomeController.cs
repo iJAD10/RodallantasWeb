@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Web_Roda_Llantas.Entities;
 using Web_Roda_Llantas.Interfaces;
 using Web_Roda_Llantas.Models;
@@ -57,7 +58,9 @@ namespace Web_Roda_Llantas.Controllers
 
         [HttpGet]
         [FiltroValidaSesion]
-        public ActionResult PrincipalCliente() { return View(); }
+        public ActionResult PrincipalCliente() {
+            ViewBag.OpcionesProductos = new SelectList(_tipoProductoModel.ConsultarTipoProducto(), "TP_Id", "TP_Nombre");
+            return View(); }
 
 		//[HttpPost]
 		//public IActionResult Principal(UsuarioEntities entidad)
