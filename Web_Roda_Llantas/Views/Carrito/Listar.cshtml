@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Web_Roda_Llantas.Entities.CarritoListarEntities>
+
+@{
+    ViewData["Title"] = "Carrito";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<h2>Carrito de Compras</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Marca</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Total por Producto</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Marca</td>
+                <td>₡@item.Precio</td>
+                <td>@item.Cantidad</td>
+                <td>₡@item.TotalPorProducto</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td>₡@Model.Sum(x => x.TotalPorProducto)</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div style="">
+    <form method="post" action="@Url.Action("FinalizarCompra", "Compras")" style="display: inline;">
+        <input type="hidden" name="usuId" value="@Context.Session.GetString("Usu_Id")" />
+        <button type="submit" class="btn btn-primary add-to-cart">Finalizar Compra</button>
+    </form>
+</div>
+

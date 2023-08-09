@@ -18,59 +18,66 @@ namespace Web_Roda_Llantas.Controllers
             _tipoProductoModel = tipoProductoModel;
             _utilitariosModel = utilitariosModel;
         }
-        [HttpGet]
-        public IActionResult ConsultarCarrito()
+        //[HttpGet]
+        //public IActionResult ConsultarCarrito()
+        //{
+        //    try
+        //    {
+        //        CarritoEntities carrito = new CarritoEntities();
+        //        var datos = carrito.consultarCarrito();
+        //        ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+        //        return datos.Count==0?  View(null): View(datos);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+        //        _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+        //        return View("Error");
+        //    }
+        //}
+
+        //[HttpGet]
+        //public IActionResult EliminarCarrito(int Prod_Id)
+        //{
+        //    try
+        //    {
+        //        CarritoEntities carrito = new CarritoEntities();
+        //        carrito.eliminarProducto(Prod_Id);
+        //        ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+        //        Alert("Eliminar producto", "El producto fue eliminado del carrito", NotificationType.warning);
+        //        return RedirectToAction("ConsultarCarrito", "Carrito");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+        //        _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+        //        return View("Error");
+        //    }
+        //}
+
+        //public IActionResult FinalizarCompra()
+        //{
+        //    try
+        //    {
+        //        CarritoEntities carrito = new CarritoEntities();
+        //        _carritoModel.RegistrarCompra(carrito.consultarCarrito());
+        //        return RedirectToAction("ConsultarFactura", "Factura");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+        //        _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+        //        return View("Error");
+        //    }
+        //}
+
+        public IActionResult Listar()
         {
-            try
-            {
-                CarritoEntities carrito = new CarritoEntities();
-                var datos = carrito.consultarCarrito();
-                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-                return datos.Count==0?  View(null): View(datos);
-            }
-            catch (Exception ex)
-            {
-                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
-                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-                return View("Error");
-            }
+            
+            int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+            var items = _carritoModel.ObtenerCarritoPorUsuario(Usu_Id);
+            return View(items);
         }
 
-        [HttpGet]
-        public IActionResult EliminarCarrito(int Prod_Id)
-        {
-            try
-            {
-                CarritoEntities carrito = new CarritoEntities();
-                carrito.eliminarProducto(Prod_Id);
-                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-                Alert("Eliminar producto", "El producto fue eliminado del carrito", NotificationType.warning);
-                return RedirectToAction("ConsultarCarrito", "Carrito");
-            }
-            catch (Exception ex)
-            {
-                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
-                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-                return View("Error");
-            }
-        }
-
-        public IActionResult FinalizarCompra()
-        {
-            try
-            {
-                CarritoEntities carrito = new CarritoEntities();
-                _carritoModel.RegistrarCompra(carrito.consultarCarrito());
-                return RedirectToAction("ConsultarFactura", "Factura");
-            }
-            catch (Exception ex)
-            {
-                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
-                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-                return View("Error");
-            }
-        }
-
-        
     }
 }

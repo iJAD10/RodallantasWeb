@@ -18,6 +18,8 @@ builder.Services.AddScoped<IProveedoresModel, ProveedoresModel>();
 builder.Services.AddScoped<IBitacoraModel, BitacoraModel>();
 builder.Services.AddScoped<IServiciosModel, ServiciosModel>();
 builder.Services.AddScoped<IReservacionesModel, ReservacionesModel>();
+builder.Services.AddScoped<ICompras, ComprasModel>();
+
 
 var app = builder.Build();
 

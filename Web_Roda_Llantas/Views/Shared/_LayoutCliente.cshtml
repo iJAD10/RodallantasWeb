@@ -89,8 +89,9 @@
                                     <a class="nav-link" href="contact.html">CONTACTENOS</a>
                                     </li>*@
                                     <li class="nav-item">
-                                        <a href="@Url.Action("ConsultarCarrito", "Carrito")" class="nav-link">
+                                        <a href="@Url.Action("Listar", "Carrito")" class="nav-link">
                                             <i class="fa-solid fa-cart-shopping"></i>
+                                            <span>@(Context.Session.GetString("Usu_Num_Carrito") ?? "0")</span>
                                             CARRITO
                                         </a>
                                     </li>
@@ -167,6 +168,7 @@
 
     <!-- end footer -->
     <!-- Javascript files-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
@@ -174,6 +176,7 @@
     <!-- sidebar -->
     <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="~/js/custom.js"></script>
+   
     <script src="https://kit.fontawesome.com/871f8ac184.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -111,6 +111,30 @@ namespace Web_Roda_Llantas.Models
             }
         }
 
-       
+        public void AgregarProductoACarrito(int usuId, int prodId, int cantidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string token = _contextAccessor.HttpContext.Session.GetString("Token").ToString();
+                string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Productos/AgregarProductoACarrito";
+
+                var request = new CarritoRequest { Usu_Id = usuId, Prod_Id = prodId, Cantidad = cantidad };
+                JsonContent body = JsonContent.Create(request);
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                HttpResponseMessage response = client.PostAsync(urlApi, body).Result;
+
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    throw new Exception("Excepción Web Api: " + response.Content.ReadAsStringAsync().Result);
+            }
+        }
+
+    }
+    public class CarritoRequest
+    {
+        public int Usu_Id { get; set; }
+        public int Prod_Id { get; set; }
+        public int Cantidad { get; set; }
+
     }
 }

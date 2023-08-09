@@ -86,7 +86,7 @@ namespace Web_Roda_Llantas.Controllers
 				return View("Error");
 			}
 		}
-		
+
 		[HttpPost]
 		public IActionResult ActualizarProductos(ProductosEntities entidad)
 		{
@@ -140,15 +140,37 @@ namespace Web_Roda_Llantas.Controllers
 		}
 
 
-        [HttpGet]
-        public IActionResult ConsultarProductoXID(int Id)
+		[HttpGet]
+		public IActionResult ConsultarProductoXID(int Id)
+		{
+			try
+			{
+				var datos = _productosModel.ConsultarProductoXID(Id);
+				ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+
+				return View(datos);
+			}
+			catch (Exception ex)
+			{
+				int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+				_utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+				return View("Error");
+			}
+		}
+
+
+        [HttpPost]
+        public IActionResult AgregarProductoACarrito(int usuId, int prodId, int cantidad)
         {
             try
             {
-                var datos = _productosModel.ConsultarProductoXID(Id);
-                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+				HttpContext.Session.GetString("Usu_Num_Carrito");
+                _productosModel.AgregarProductoACarrito(usuId, prodId, cantidad);
 
-                return View(datos);
+                TempData["SuccessMessage"] = "Producto agregado correctamente";
+
+                // Redirige a la vista donde quieres mostrar el mensaje.
+                return RedirectToAction("ConsultarProductosCliente", "Productos");
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Web_Roda_Llantas.Entities;
 using Web_Roda_Llantas.Interfaces;
@@ -37,24 +38,24 @@ namespace Web_Roda_Llantas.Controllers
             }
         }
 
-        [HttpGet]
-        [FiltroValidaSesion]
-        public IActionResult Principal()
-        {
-            try
-            {
-                CarritoEntities carrito = new CarritoEntities();
-                carrito.limpiarCarrito();
-                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-                return View();
-            }
-            catch (Exception ex)
-            {
-                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
-                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-                return View("Error");
-            }
-        }
+        //[HttpGet]
+        //[FiltroValidaSesion]
+        //public IActionResult Principal()
+        //{
+        //    try
+        //    {
+        //        CarritoEntities carrito = new CarritoEntities();
+        //        carrito.limpiarCarrito();
+        //        ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+        //        return View();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+        //        _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+        //        return View("Error");
+        //    }
+        //}
 
         [HttpGet]
         [FiltroValidaSesion]
@@ -100,8 +101,9 @@ namespace Web_Roda_Llantas.Controllers
 				if (resultado != null)
 				{
 					HttpContext.Session.SetString("Nombre", resultado.Usu_Nombre);
-					HttpContext.Session.SetString("Correo", resultado.Usu_Correo);
-					HttpContext.Session.SetString("Token", resultado.Token);
+                    HttpContext.Session.SetString("Correo", resultado.Usu_Correo);
+                    HttpContext.Session.SetString("Usu_Num_Carrito", resultado.Usu_Num_Carrito.ToString());
+                    HttpContext.Session.SetString("Token", resultado.Token);
 					HttpContext.Session.SetString("Usu_Id", resultado.Usu_Id.ToString());
 
 					if (resultado.UR_Rol_Id == 1) // Si el usuario es administrador
@@ -139,7 +141,7 @@ namespace Web_Roda_Llantas.Controllers
             {
                 HttpContext.Session.Clear();
                 CarritoEntities carrito = new CarritoEntities();
-                carrito.limpiarCarrito();
+                //carrito.limpiarCarrito();
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)

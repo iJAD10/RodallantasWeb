@@ -13,5 +13,7 @@
         public string Prod_Url_Img { get; set; }
         public string Prov_Nombre_Agente { get; set; }
         public string TP_Nombre { get; set; }
+        public int Cantidad { get; set; }
+
     }
 }

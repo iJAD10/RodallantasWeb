@@ -3,10 +3,18 @@
 @{
     ViewData["Title"] = "ConsultarProductosCliente";
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    var message = TempData["SuccessMessage"] as string;
 }
 }
 
-
+@if (!string.IsNullOrEmpty(message))
+{
+    <script>
+        window.onload = function () {
+            alert('@message');  // O usar toastr, modal, etc.
+        }
+    </script>
+}
 
 <style>
     .product-img {
@@ -31,15 +39,47 @@
                     <div class="card-body">
                         <h4 class="card-title product-title">@item.Prod_Marca</h4>
                         <p class="card-text">₡@item.Prod_Precio</p>
-                        <a href="@Url.Action("Edit", "Productos", new { Id = item.Prod_Id })" class="btn btn-primary">Agregar al carrito</a>
+
+                        <!-- Formulario para agregar al carrito -->
+                        <form method="post" action="@Url.Action("AgregarProductoACarrito", "Productos")" style="display: inline;">
+                            <input type="hidden" name="prodId" value="@item.Prod_Id" />
+                            <input type="hidden" name="usuId" value="@Context.Session.GetString("Usu_Id")" />
+                            <input type="hidden" name="cantidad" value="1" />
+                            <button type="submit" class="btn btn-primary add-to-cart">Agregar al carrito</button>
+                        </form>
+
                         <a href="@Url.Action("ConsultarProductoXID", "Productos", new { Id = item.Prod_Id })" class="btn btn-secondary">Detalles</a>
-                       @* <a href="@Url.Action("Delete", "Productos", new { id = item.Prod_Id })" class="btn btn-danger">Delete</a>*@
+                        @* <a href="@Url.Action("Delete", "Productos", new { id = item.Prod_Id })" class="btn btn-danger">Delete</a>*@
                     </div>
                 </div>
             </div>
-            
         }
     </div>
     <hr />
 </div>
-<hr/> 
+<hr />
+
+@*<script>
+    $(document).ready(function () {
+        $(".add-to-cart").on("click", function (e) {
+            e.preventDefault();
+
+            const form = $(this).closest("form");
+            $.ajax({
+                type: "POST",
+                url: form.attr("action"),
+                data: form.serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        alert("Producto añadido correctamente!");
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Hubo un error al añadir el producto.");
+                }
+            });
+        });
+    });
+</script>*@

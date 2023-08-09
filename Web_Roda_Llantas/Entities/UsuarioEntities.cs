@@ -10,6 +10,7 @@
         public bool Usu_Estado { get; set; }
         public string Token { get; set; } = string.Empty;
 		public int UR_Rol_Id { get; set; }
+        public int Usu_Num_Carrito { get; set; }
 
-	}
+    }
 }

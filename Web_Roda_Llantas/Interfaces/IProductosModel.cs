@@ -11,5 +11,6 @@ namespace Web_Roda_Llantas.Interfaces
         public void ActualizarProductos(ProductosEntities entidad);
 
         public int RegistrarProductos(ProductosRegistrarEntities entidad);
+        void AgregarProductoACarrito(int usuId, int prodId, int cantidad);
     }
 }
