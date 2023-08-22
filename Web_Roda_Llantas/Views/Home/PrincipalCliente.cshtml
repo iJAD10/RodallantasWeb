@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Web_Roda_Llantas.Entities.ProductosEntities>
+﻿@model Web_Roda_Llantas.Entities.ProductosEntities
 @{
     ViewData["Title"] = "ConsultarProductosCliente";
     Layout = "~/Views/Shared/_LayoutCliente2.cshtml";
@@ -56,14 +56,49 @@
                 <img src="~/img/Banner2.jpg class="d-block w-100" alt="Banner2">
             </div>
             <div class="carousel-item">
-                <img src="~/img/Banner3.jpg" class="d-block w-100" alt="Banner3">
-            </div>*@
+                <div class="container-fluid">
+                    <div class="carousel-caption">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-bg">
+                                    <h1>RodaLlantas de Turrialba</h1>
+                                    <span>car repair services</span>
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, </p>
+                                    <a href="#">More Info </a> <a href="#">Contact Us</a>
+                                </div>
+                            </div>
+                            @*          <div class="col-md-6">
+                            <div class="text_img">
+                            <figure><img src="~/template/images/car.png" alt="#" /></figure>
+                            </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container-fluid">
+                    <div class="carousel-caption">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-bg">
+                                    <h1>RodaLlantas de Turrialba</h1>
+                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, </p>
+                                    <a href="#">More Info </a> <a href="#">Contact Us</a>
+                                </div>
+                            </div>
+                            @*    <div class="col-md-6">
+                            <div class="text_img">
+                            <figure><img src="images/car.png" alt="#" /></figure>
+                            </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Controles del carrusel (anterior/siguiente) -->
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+        <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </a>
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
@@ -78,40 +113,177 @@
 <div class="three_box py-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 text-center">
-                <img src="~/template/images/thr.png" alt="Diagnóstico rápido" class="mb-3 d-block mx-auto">
-                <h3>DIAGNOSTICO RAPIDO</h3>
-                <p>Realizamos diagnósticos rápidos y precisos para determinar el estado de tus llantas y ofrecerte las mejores soluciones.</p>
+            <div class="col-md-4">
+                <div class="box_text">
+                    <h3>DIAGNOSTICO RAPIDO</h3>
+                    <i><img src="~/template/images/thr.png" alt="#" /></i>
+                    <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d veniam</p>
+                </div>
             </div>
-            <div class="col-md-4 text-center">
-                <img src="~/template/images/thr1.png" alt="Servicios" class="mb-3 d-block mx-auto">
-                <h3>SERVICIOS</h3>
-                <p>Ofrecemos una amplia gama de servicios, desde cambio de llantas hasta alineación y balanceo, para asegurar el óptimo desempeño de tu vehículo.</p>
+            <div class="col-md-4">
+                <div class="box_text">
+                    <h3>SERVICIOS</h3>
+                    <i><img src="~/template/images/thr1.png" alt="#" /></i>
+                    <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d veniam</p>
+                </div>
             </div>
-            <div class="col-md-4 text-center">
-                <img src="~/template/images/thr2.png" alt="Llantas y más" class="mb-3 d-block mx-auto">
-                <h3>LLANTAS Y MAS</h3>
-                <p>Contamos con una extensa variedad de llantas y accesorios para que encuentres exactamente lo que necesitas para tu vehículo.</p>
+            <div class="col-md-4">
+                <div class="box_text">
+                    <h3>LLANTAS Y MAS</h3>
+                    <i><img src="~/template/images/thr2.png" alt="#" /></i>
+                    <p>ipsum dolor sit amet, consectetur adipiscing elit, sed d veniam, adipiscing elit, sed d veniam</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<h4 class="text-center py-4">Algunos de nuestros productos</h4>
-<div class="container">
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-6 mb-4">
-                <div class="card custom-card">
-                    <img class="card-img-top" src="@item.Prod_Url_Img" alt="Product Image">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Prod_Nombre</h5>
-                        <p class="card-text">Marca: @item.Prod_Marca</p>
-                        <p class="card-text">Precio: @item.Prod_Precio</p>
-                        <p class="card-text">Stock: @item.Prod_CantStock</p>
-                        <p class="card-text">Proveedor: @item.Prov_Nombre_Agente</p>
-                        <p class="card-text">Tipo: @item.TP_Nombre</p>
+@*Productos*@
+                  <div class="about">
+                      <div class="form-group col-md-6">
+                          <label for="Prod_TipoProducto_Id">Nombre del Tipo de Producto</label>
+                          @Html.DropDownListFor(m => m.Prod_TipoProducto_Id, (IEnumerable<SelectListItem>)ViewBag.OpcionesProductos, "Seleccione un Tipo de Producto", new { @class="form-control form-control-sm", @required = true})
+                      </div>
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="titlepage">
+                                      <h2>PRODUCTOS </h2>
+                                  </div>
+                                  <div id="carouselExampleIndicators" class="carousel slide">
+                                      <div class="carousel-indicators">
+                                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                      </div>
+                                      <div class="carousel-inner">
+                                          <div class="carousel-item active">
+                                              <img src="/img/base rack.png" class="d-block w-100" alt="...">
+                                          </div>
+                                          <div class="carousel-item">
+                                              <img src="/img/intensity iq.png" class="d-block w-100" alt="...">
+                                          </div>
+                                          <div class="carousel-item">
+                                              <img src="/img/duratrac.jpg" class="d-block w-100" alt="...">
+                                          </div>
+                                      </div>
+                                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Previous</span>
+                                      </button>
+                                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Next</span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="container">
+                              <div class="row">
+                                  <div class="col-md-10 offset-md-1">
+                                      <div class="about_img">
+                                          <div class="about_box">
+                                              @* <h3>Dolor sit amet, consectetur adipiscing elit,  </h3>
+                                <p>dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                                <a class="read_more">Read More</a>*@
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+<!-- testimonial -->
+<div class="testimonial">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>NUESTROS CLIENTES</h2>
+                    <p>It is a long established fact that a reader will be distracted by the </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="myCarousel" class="carousel slide testimonial_Carousel " data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="container">
+                                <div class="carousel-caption ">
+                                    <div class="row">
+                                        <div class="col-md-6 margin_boot">
+                                            <div class="test_box">
+                                                <i><img src="~/template/images/tes.jpg" alt="#" /></i>
+                                                <h4>JCKOLO</h4>
+                                                <span>(It is a long )</span>
+                                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 margin_boot">
+                                            <div class="test_box">
+                                                <i><img src="~/template/images/tes1.jpg" alt="#" /></i>
+                                                <h4>ROCOYO</h4>
+                                                <span>(It is a long )</span>
+                                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-md-6 margin_boot">
+                                            <div class="test_box">
+                                                <i><img src="~/template/images/tes.jpg" alt="#" /></i>
+                                                <h4>JCKOLO</h4>
+                                                <span>(It is a long )</span>
+                                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 margin_boot">
+                                            <div class="test_box">
+                                                <i><img src="~/template/images/tes1.jpg" alt="#" /></i>
+                                                <h4>ROCOYO</h4>
+                                                <span>(It is a long )</span>
+                                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-md-6 margin_boot">
+                                            <div class="test_box">
+                                                <i><img src="~/template/images/tes.jpg" alt="#" /></i>
+                                                <h4>JCKOLO</h4>
+                                                <span>(It is a long )</span>
+                                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 margin_boot">
+                                            <div class="test_box">
+                                                <i><img src="~/template/images/tes1.jpg" alt="#" /></i>
+                                                <h4>ROCOYO</h4>
+                                                <span>(It is a long )</span>
+                                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
