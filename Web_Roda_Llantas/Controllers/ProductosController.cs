@@ -139,8 +139,25 @@ namespace Web_Roda_Llantas.Controllers
 			}
 		}
 
+        [HttpGet]
+        public IActionResult ConsultarProductosConStock()
+        {
+            try
+            {
+                var datos = _productosModel.ConsultarProductosConStock();
+                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
 
-		[HttpGet]
+                return View(datos);
+            }
+            catch (Exception ex)
+            {
+                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
 		public IActionResult ConsultarProductoXID(int Id)
 		{
 			try
@@ -159,27 +176,49 @@ namespace Web_Roda_Llantas.Controllers
 		}
 
 
+        //    [HttpPost]
+        //    public IActionResult AgregarProductoACarrito(int usuId, int prodId, int cantidad)
+        //    {
+        //        try
+        //        {
+        //HttpContext.Session.GetString("Usu_Num_Carrito");
+        //            _productosModel.AgregarProductoACarrito(usuId, prodId, cantidad);
+
+        //            TempData["SuccessMessage"] = "Producto agregado correctamente";
+
+        //            // Redirige a la vista donde quieres mostrar el mensaje.
+        //            return RedirectToAction("ConsultarProductosCliente", "Productos");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+        //            _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+        //            return View("Error");
+        //        }
+        //    }
+
+
+        //Metodo con AJAX
         [HttpPost]
         public IActionResult AgregarProductoACarrito(int usuId, int prodId, int cantidad)
         {
             try
             {
-				HttpContext.Session.GetString("Usu_Num_Carrito");
                 _productosModel.AgregarProductoACarrito(usuId, prodId, cantidad);
 
-                TempData["SuccessMessage"] = "Producto agregado correctamente";
+                // Suponiendo que tienes un método que te da la cantidad actual en el carrito.
+                int nuevoNumero = int.Parse(HttpContext.Session.GetString("Usu_Num_Carrito")) + 1;
+                HttpContext.Session.SetString("Usu_Num_Carrito", nuevoNumero.ToString());
 
-                // Redirige a la vista donde quieres mostrar el mensaje.
-                return RedirectToAction("ConsultarProductosCliente", "Productos");
+                return Json(new { success = true, nuevoNumero = nuevoNumero });
             }
             catch (Exception ex)
             {
                 int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
                 _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-                return View("Error");
+                return Json(new { success = false, message = ex.Message });
             }
         }
-
     }
 
 }

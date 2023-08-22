@@ -34,6 +34,25 @@ namespace Web_Roda_Llantas.Models
                 return new List<ProductosEntities>();
             }
         }
+        public List<ProductosEntities>? ConsultarProductosConStock()
+        {
+            using (var client = new HttpClient())
+            {
+                string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Productos/ConsultarProductosConStock";
+
+                string token = _contextAccessor.HttpContext.Session.GetString("Token").ToString();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                HttpResponseMessage response = client.GetAsync(urlApi).Result;
+
+                if (response.IsSuccessStatusCode)
+                    return response.Content.ReadFromJsonAsync<List<ProductosEntities>>().Result;
+
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    throw new Exception("Excepción Web Api: " + response.Content.ReadAsStringAsync().Result);
+
+                return new List<ProductosEntities>();
+            }
+        }
         public ProductosEntities ConsultarProductoXID(int Id)
         {
             using (var client = new HttpClient())
@@ -135,6 +154,7 @@ namespace Web_Roda_Llantas.Models
         public int Usu_Id { get; set; }
         public int Prod_Id { get; set; }
         public int Cantidad { get; set; }
+        public int Total { get; set; }
 
     }
 }

@@ -2,23 +2,27 @@
 
 @{
     ViewData["Title"] = "Recuperar Contraseña";
-    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    Layout = "~/Views/Shared/_Layout_Login2.cshtml";
 }
-
+<br />
+<br />
 <div class="row w-100 mx-0">
-    <div class="col-lg-4 mx-auto">
-        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-            <div class="brand-logo">
-                @*<img src="~/template/images/logo.svg" alt="logo" />*@
+    <div class="col-lg-6 mx-auto">
+        <!-- Cambiamos el color de fondo a #343a40 para que sea igual al navbar y footer -->
+        <div class="auth-form-light text-left py-5 px-4 px-sm-5" style="background-color: #343a40; font-family: 'Raleway', sans-serif;">
+
+            <div class="text-center mb-4">
+                <img src="~/img/Logo.jpeg" alt="Logo de Roda Llantas" style="width: 120px;">
             </div>
-            <h4>Recuperar Contraseña</h4>
+            <h4 class="text-center" style="color: #fff;">Recuperar Contraseña</h4>
+            <p style="color: #fff;">Introcuce tu correo, luego recibiras un correo electronico con tu contraseña.</p>
             @using (Html.BeginForm("RecuperarContrasenna", "Home", FormMethod.Post))
             {
                 <div class="form-group">
                     @Html.TextBoxFor(m => m.Usu_Correo,
                         new
                         {
-                            @class="form-control form-control-lg",
+                            @class="form-control form-control",
                             @placeholder="Correo",
                             @type="email",
                             @onblur="BuscarCorreo('RecuperarContra');",
@@ -26,7 +30,9 @@
                         })
                 </div>
                 <div class="mt-3">
-                    <input type="submit" id="btnProcesar" disabled class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="Procesar" />
+                    <input type="submit" id="btnProcesar" disabled class="btn btn-block btn-primary btn font-weight-medium auth-form-btn" value="Procesar" />
+                    <br/>
+                    <a href="@Url.Action("Index", "Home")" class="text-primary">Volver a incio de sesión</a>
                 </div>
             }
         </div>

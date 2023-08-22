@@ -14,13 +14,15 @@ namespace Web_Roda_Llantas.Controllers
         private readonly IUsuarioModel _usuarioModel;
         private readonly ITipoProductoModel _tipoProductoModel;
         private readonly IUtilitariosModel _utilitariosModel;
+        private readonly IProductosModel _productosModel;
 
-        public HomeController(ILogger<HomeController> logger, IUsuarioModel usuarioModel,ITipoProductoModel tipoProductoModel, IUtilitariosModel utilitariosModel)
+        public HomeController(ILogger<HomeController> logger, IUsuarioModel usuarioModel,ITipoProductoModel tipoProductoModel, IUtilitariosModel utilitariosModel,IProductosModel productosModel)
         {
             _logger = logger;
             _usuarioModel = usuarioModel;
             _tipoProductoModel = tipoProductoModel;
             _utilitariosModel = utilitariosModel;
+            _productosModel = productosModel;
         }
 
         [HttpGet]
@@ -38,30 +40,32 @@ namespace Web_Roda_Llantas.Controllers
             }
         }
 
-        //[HttpGet]
-        //[FiltroValidaSesion]
-        //public IActionResult Principal()
-        //{
-        //    try
-        //    {
-        //        CarritoEntities carrito = new CarritoEntities();
-        //        carrito.limpiarCarrito();
-        //        ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
-        //        return View();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
-        //        _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
-        //        return View("Error");
-        //    }
-        //}
-
         [HttpGet]
         [FiltroValidaSesion]
-        public ActionResult PrincipalCliente() {
-            ViewBag.OpcionesProductos = new SelectList(_tipoProductoModel.ConsultarTipoProducto(), "TP_Id", "TP_Nombre");
-            return View(); }
+        public IActionResult Principal()
+        {
+            try
+            {
+                CountEntities count = _utilitariosModel.Count();
+                
+                CarritoEntities carrito = new CarritoEntities();
+                //carrito.limpiarCarrito();
+                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+                return View(count);
+            }
+            catch (Exception ex)
+            {
+                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+                return View("Error");
+            }
+        }
+
+        //[HttpGet]
+        //[FiltroValidaSesion]
+        //public ActionResult PrincipalCliente() {
+        //    ViewBag.OpcionesProductos = new SelectList(_tipoProductoModel.ConsultarTipoProducto(), "TP_Id", "TP_Nombre");
+        //    return View(); }
 
 		//[HttpPost]
 		//public IActionResult Principal(UsuarioEntities entidad)
@@ -220,6 +224,30 @@ namespace Web_Roda_Llantas.Controllers
         public IActionResult BuscarExisteCorreo(string Usu_Correo)
         {
             return Json(_usuarioModel.BuscarExisteCorreo(Usu_Correo));
+        }
+
+        public IActionResult Nosotros()
+        {
+            return View();   
+        }
+
+        [HttpGet]
+        [FiltroValidaSesion]
+        public IActionResult PrincipalCliente()
+        {
+            try
+            {
+                var datos = _productosModel.ConsultarProductos();
+                ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
+
+                return View(datos);
+            }
+            catch (Exception ex)
+            {
+                int Usu_Id = int.Parse(HttpContext.Session.GetString("Usu_Id"));
+                _utilitariosModel.RegistrarBitacora(ex, ControllerContext, Usu_Id);
+                return View("Error");
+            }
         }
     }
 }

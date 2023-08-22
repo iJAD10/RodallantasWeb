@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Web_Roda_Llantas.Entities.OrdenCompraListar>
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h1>Listado de Órdenes</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID Orden
+            </th>
+            <th>
+                Nombre Usuario
+            </th>
+            <th>
+                Fecha de Orden
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Orden_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usu_Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaOrden)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @if (item.Estado)
+                    {
+                        <span style="color:green">Completado</span>
+                    }
+                    else
+                    {
+                        <span style="color:red">Pendiente</span>
+                    }
+                </td>
+                <td>
+                    <form asp-action="CambiarCompletado" method="post" style="display: inline-block;">
+                        <input type="hidden" name="orden_Id" value="@item.Orden_Id" />
+                        <button type="submit" class="btn btn-primary">Cambiar Estado</button>
+                    </form>
+                    @Html.ActionLink("Detalles", "ListarDetalleOrdenPorId", new { orden_Id = item.Orden_Id }) |
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

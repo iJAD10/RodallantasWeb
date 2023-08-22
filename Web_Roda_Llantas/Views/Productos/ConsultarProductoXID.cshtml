@@ -2,41 +2,114 @@
 
 @{
     ViewData["Title"] = "ConsultarProductoXID";
-    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    Layout = "~/Views/Shared/_LayoutCliente2.cshtml";
 }
-<div class="container">
-    <hr />
-    <h1 class="color-dark">Detalles del producto:</h1>
-    <hr />
-    <div class="row">
-        
-        <div class="col-md-6">
-            <img src="@Html.DisplayFor(model => model.Prod_Url_Img)" class="img-fluid" alt="Imagen del Producto">
-        </div>
 
+<style>
+    .product-details-container {
+        padding: 40px 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .product-image {
+        max-width: 100%;
+        border: 1px solid #eaeaea;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-info {
+        padding: 20px;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .product-info h1,
+        .product-info h2,
+        .product-info h3 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+</style>
+
+<div class="container product-details-container">
+    <div class="row">
         <div class="col-md-6">
-            <div class="card">
-                
-                <div class="card-body">
-                    <h1 class="card-title text-dark">@Html.DisplayFor(model => model.Prod_Marca)</h1>
-                    <h2 class="card-subtitle mb-2 text-dark">Precio: @Html.DisplayFor(model => model.Prod_Precio)</h2>
-                    @*<h3 class="card-text text-dark">Total: @Html.DisplayFor(model => model.Prod_total)</h3>*@
-                    <h3 class="card-text text-dark">Cantidad en Stock: @Html.DisplayFor(model => model.Prod_CantStock)</h3>
-                    <h3 class="card-text text-dark">Nombre del Proveedor: @Html.DisplayFor(model => model.Prov_Nombre_Agente)</h3>
-                    <h3 class="card-text text-dark">Tipo de Producto: @Html.DisplayFor(model => model.TP_Nombre)</h3>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Agregar al Carrito</a>
-                    <a href="#" class="btn btn-secondary">Volver a productos</a>
-                </div>
+            <img src="@Html.DisplayFor(model => model.Prod_Url_Img)" class="img-fluid product-image" alt="Imagen del Producto">
+        </div>
+        <div class="col-md-6">
+            <div class="product-info">
+                <h1>@Html.DisplayFor(model => model.Prod_Nombre)</h1>
+                <h2>@Html.DisplayFor(model => model.Prod_Marca)</h2>
+                <h3>Precio: @Html.DisplayFor(model => model.Prod_Precio)</h3>
+                <p>Cantidad en Stock: @Html.DisplayFor(model => model.Prod_CantStock)</p>
+                <p>Nombre del Proveedor: @Html.DisplayFor(model => model.Prov_Nombre_Agente)</p>
+                <p>Tipo de Producto: @Html.DisplayFor(model => model.TP_Nombre)</p>
+                <p>@Html.DisplayFor(model => model.Prod_Descripcion)</p>
+               @* <form method="post" action="@Url.Action("AgregarAlCarrito", "Carrito")">
+                    <input type="hidden" name="ProductoId" value="@Model.Prod_Id" />
+                    <input type="hidden" name="Cantidad" value="1" />
+                    <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+                </form>*@
+                <a href="@Url.Action("ConsultarProductosCliente", "Productos")" class="btn btn-secondary">Volver</a>
             </div>
         </div>
     </div>
 </div>
-<hr />
+
 <br />
 <br />
 <br />
 <br />
 <br />
 <br />
+<br />
+<!-- Scripts -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+<!-- JS para SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".add-to-cart").on("click", function (e) {
+            e.preventDefault();
+
+            const form = $(this).closest("form");
+            $.ajax({
+                type: "POST",
+                url: form.attr("action"),
+                data: form.serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Producto añadido correctamente',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // Aquí actualizas el número en el carrito.
+                        $('span#numeroCarrito').text(response.nuevoNumero);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Hubo un error al añadir el producto.'
+                    });
+                }
+            });
+        });
+    });
+</script>
+

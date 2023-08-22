@@ -29,6 +29,11 @@
             }
         }
 
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+        
         .navbar,
         .nav-link,
         .btn-danger,
@@ -58,7 +63,6 @@
 </head>
 
 <body>
-
     <div class="container-fluid page-body-wrapper">
         <!-- Button to show the menu in mobile view -->
         <button id="menu-icon" style="display: none; z-index: 9999;" class="btn btn-dark" onclick="toggleSidebar()">☰</button>
@@ -67,17 +71,19 @@
             <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar" id="sidebar">
                 <!-- ... código del menú ... -->
                 <!-- Logo de la Empresa -->
-                <div class="navbar navbar-dark bg-dark py-3">
-                    <a class="navbar-brand" href="#">
-                        <img src="~/img/Logo.jpeg" alt="Logo RodaLlantas" width="30" height="30" class="d-inline-block align-top">
-                        RodaLlantas
+                <div class="navbar navbar-dark bg-dark py-3 d-flex justify-content-center">
+                    <a class="navbar-brand d-flex align-items-center" href="#">
+                        <img src="~/img/Logo.jpeg" alt="Logo RodaLlantas" width="60" height="60" class="d-inline-block align-top mr-2">
+                        
                     </a>
-                    <div class="text-white mt-2">
-                        Bienvenido administrador
-                    </div>
+                    <h1 class="mb-0">RodaLlantas</h1>
+                </div>
+                <div class="text-white text-center mt-2">
+                    Bienvenido administrador
                 </div>
 
-                 <!-- Links del Menú -->
+
+                <!-- Links del Menú -->
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Principal", "Home")">
@@ -179,25 +185,29 @@
                             </ul>
                         </div>
                     </li>
-
+                   
                 </ul>
                 <div class="mt-4">
                     <a href="@Url.Action("CerrarSesion", "Home")" class="nav-link">
                         <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                     </a>
                 </div>
-
+                
             </nav>
+
             <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mt-0">
                 <br />
                 @RenderBody()
+
             </div>
+            <footer class="bg-dark text-white text-center py-3 w-100">
+                Roda Llantas de Turrialba S.A. © 2023.
+            </footer>
         </div>
        
     </div>
-    <footer class="bg-dark text-white text-center py-3 w-100">
-        Roda Llantas de Turrialba S.A. © 2023.
-    </footer>
+   
+  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Web_Roda_Llantas.Entities.ListarDetalleOrdenPorId>
+
+@{
+    ViewData["Title"] = "ListarDetalleOrdenPorId";
+}
+
+<h1>Detalle der Orden</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        Información de Orden
+    </div>
+    <div class="card-body">
+        <strong>Usuario:</strong> @Model.FirstOrDefault()?.Usu_Nombre <br>
+        <strong>Fecha de Orden:</strong> @Model.FirstOrDefault()?.FechaOrden.ToString("dd/MM/yyyy") <br>
+        <strong>Total:</strong> @Model.FirstOrDefault()?.Total.ToString("C")
+    </div>
+</div>
+
+<h2>Detalles de Productos</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductoNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductoPrecio)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductoPrecio)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

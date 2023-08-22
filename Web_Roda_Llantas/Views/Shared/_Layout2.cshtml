@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RodaLlantas</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        @@media (max-width: 992px) {
+            #sidebar {
+                display: none;
+            }
+            #menu-icon {
+                display: inline-block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid page-body-wrapper">
+        <!-- Button to show the menu in mobile view -->
+        <button id="menu-icon" style="display: none; z-index: 9999;" class="btn btn-dark" onclick="toggleSidebar()">☰</button>
+        
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar" id="sidebar">
+            <!-- Logo de la Empresa -->
+            <div class="navbar navbar-dark bg-dark py-3">
+                <a class="navbar-brand" href="#">
+                    <img src="~/img/Logo.jpeg" alt="Logo RodaLlantas" width="30" height="30" class="d-inline-block align-top">
+                    RodaLlantas
+                </a>
+                <div class="text-white mt-2">
+                    Bienvenido administrador
+                </div>
+            </div>
+
+            <!-- Links del Menú -->
+            <ul class="nav flex-column">
+               <li class="nav-item">
+    <a class="nav-link" href="@Url.Action("Principal", "Home")">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">Inicio</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" data-toggle="collapse" href="#usuarios" aria-expanded="false" aria-controls="usuarios">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Usuarios</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="collapse" id="usuarios">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ConsultarUsuarios", "Usuarios")">Consulta de Usuarios</a>
+            </li>
+        </ul>
+    </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link" data-toggle="collapse" href="#servicios" aria-expanded="false" aria-controls="servicios">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Servicios</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="collapse" id="servicios">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarServicios","Servicios")">Lista de Servicios</a></li>
+        </ul>
+    </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link" data-toggle="collapse" href="#compras" aria-expanded="false" aria-controls="compras">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Compras</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="collapse" id="compras">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="@Url.Action("Listar","Compras")">Lista Compras</a></li>
+        </ul>
+    </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link" data-toggle="collapse" href="#vehiculos" aria-expanded="false" aria-controls="vehiculos">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Vehiculos</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="collapse" id="vehiculos">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarVehiculos","Vehiculos")">Lista de Vehículos</a></li>
+        </ul>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" data-toggle="collapse" href="#proovedores" aria-expanded="false" aria-controls="proovedores">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Proveedores</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="collapse" id="proovedores">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarProveedores","Proveedores")">Información</a></li>
+        </ul>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" data-toggle="collapse" href="#productos" aria-expanded="false" aria-controls="productos">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Productos</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="collapse" id="productos">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarProductos", "Productos")">Consultar</a></li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="@Url.Action("RegistrarProductos", "Productos")">Registrar</a></li>
+        </ul>
+    </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link" data-toggle="collapse" href="#reservaciones" aria-expanded="false" aria-controls="reservaciones">
+        <i class="icon-layout menu-icon"></i>
+        <span class="menu-title">Reservaciones</span>
+        <i class="menu-arrow"></i>
+    </a>
+    <div class="collapse" id="reservaciones">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarReservaciones","Reservaciones")">Consultar</a></li>
+        </ul>
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="@Url.Action("RegistrarReservacion", "Reservaciones")">Reservar</a></li>
+        </ul>
+    </div>
+</li>
+            </ul>
+
+            <!-- Cerrar sesión -->
+            <div class="mt-4">
+                <a href="@Url.Action("CerrarSesion", "Home")" class="btn btn-danger">Cerrar Sesión</a>
+            </div>
+        </nav>
+        <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mt-0">
+            @RenderBody()
+        </div>
+        <footer class="bg-dark text-white text-center py-3 w-100">
+            Roda Llantas de Turrialba S.A. © 2023.
+        </footer>
+    </div>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            if (sidebar.style.display === "none") {
+                sidebar.style.display = "block";
+            } else {
+                sidebar.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+
+

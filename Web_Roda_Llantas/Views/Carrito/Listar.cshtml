@@ -2,9 +2,9 @@
 
 @{
     ViewData["Title"] = "Carrito";
-    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    Layout = "~/Views/Shared/_LayoutCliente2.cshtml";
 }
-
+<hr />
 <h2>Carrito de Compras</h2>
 
 <table class="table">
@@ -13,7 +13,7 @@
             <th>Marca</th>
             <th>Precio Unitario</th>
             <th>Cantidad</th>
-            <th>Total por Producto</th>
+          
         </tr>
     </thead>
     <tbody>
@@ -23,13 +23,13 @@
                 <td>@item.Marca</td>
                 <td>₡@item.Precio</td>
                 <td>@item.Cantidad</td>
-                <td>₡@item.TotalPorProducto</td>
+                
             </tr>
         }
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3"><strong>Total</strong></td>
+            <td colspan="2"><strong>Total</strong></td>
             <td>₡@Model.Sum(x => x.TotalPorProducto)</td>
         </tr>
     </tfoot>
@@ -38,7 +38,31 @@
 <div style="">
     <form method="post" action="@Url.Action("FinalizarCompra", "Compras")" style="display: inline;">
         <input type="hidden" name="usuId" value="@Context.Session.GetString("Usu_Id")" />
+        <input type="hidden" name="total" value="@Model.Sum(x => x.TotalPorProducto)" />
         <button type="submit" class="btn btn-primary add-to-cart">Finalizar Compra</button>
     </form>
 </div>
 
+<br />
+
+<br />
+<br />
+
+<br />
+
+
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

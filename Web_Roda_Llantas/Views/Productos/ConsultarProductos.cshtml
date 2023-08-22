@@ -4,6 +4,8 @@
     ViewData["Title"] = "Consultar Productos";
     var usuario = Context.Session.GetString("Correo")?.ToString();
 }
+@*Las 3 Cajas de los servicios *@
+
 
 <div class="col-lg-12 stretch-card">
     <div class="card">
@@ -15,14 +17,15 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Nombre</th>
                             <th>Marca</th>
                             <th>Precio</th>
-                            <th>Total</th>
+                         
                             <th>Cantidad en Stock</th>
                             <th>Nombre del Proveedor</th> <!-- nueva columna -->
                             <th>Tipo de Producto</th> <!-- nueva columna -->
                             <th>Imagen</th>
-                            <th>Acciones</th>
+                            @*<th>Acciones</th>*@
                         </tr>
                     </thead>
                     <tbody>
@@ -30,17 +33,18 @@
                         {
                             <tr>
                                 <td>@item.Prod_Id</td>
+                                <td>@item.Prod_Nombre</td>
                                 <td>@item.Prod_Marca</td>
                                 <td>@item.Prod_Precio</td>
-                                <td>@item.Prod_total</td>
+                                
                                 <td>@item.Prod_CantStock</td>
                                 <td>@item.Prov_Nombre_Agente</td> <!-- nueva celda -->
                                 <td>@item.TP_Nombre</td> <!-- nueva celda -->
-                                <td><img src="@item.Prod_Url_Img" alt="Product Image" width="300" height="300"></td>
+                                <td><img src="@item.Prod_Url_Img" alt="Product Image" width="100" height="100"></td>
                                 <td>
-                                    <a href="@Url.Action("Editar", "Productos", new { id = item.Prod_Id })">Editar</a> |
+                                  @*  <a href="@Url.Action("Editar", "Productos", new { id = item.Prod_Id })">Editar</a> |
                                     <a href="@Url.Action("Detalles", "Productos", new { id = item.Prod_Id })">Detalles</a> |
-                                    <a href="@Url.Action("Eliminar", "Productos", new { id = item.Prod_Id })">Eliminar</a>
+                                    <a href="@Url.Action("Eliminar", "Productos", new { id = item.Prod_Id })">Eliminar</a>*@
                                 </td>
                             </tr>
                         }
@@ -51,3 +55,4 @@
         </div>
     </div>
 </div>
+

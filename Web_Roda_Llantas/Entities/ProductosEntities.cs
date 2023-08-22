@@ -3,6 +3,8 @@
     public class ProductosEntities
     {
         public int Prod_Id { get; set; }
+        public string Prod_Nombre { get; set; }
+        public string Prod_Descripcion { get; set; }
         public string Prod_Marca { get; set; } = string.Empty;
         public double Prod_Precio { get; set; }
         public double Prod_total { get; set; }

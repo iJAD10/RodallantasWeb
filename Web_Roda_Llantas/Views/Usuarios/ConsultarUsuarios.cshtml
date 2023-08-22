@@ -31,7 +31,7 @@
                                 <td>@item.Usu_Correo</td>
                                 <td>@(item.Usu_Estado ? "Activo" : "Inactivo")</td>
                                 <td>
-                                    <a href="@Url.Action("ActualizarUsuario", "Usuarios", new { q = item.Usu_Id })">Actualizar</a>
+                                    @*<a href="@Url.Action("ActualizarUsuario", "Usuarios", new { q = item.Usu_Id })">Actualizar</a>*@
                                     <a href="" onclick="InactivarUsuario(@item.Usu_Id);">Cambiar Estado</a>
                                 </td>
                             </tr>

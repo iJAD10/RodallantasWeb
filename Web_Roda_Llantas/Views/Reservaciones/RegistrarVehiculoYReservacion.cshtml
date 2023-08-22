@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "RegistrarVehiculoYReservacion";
-     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+     Layout = "~/Views/Shared/_LayoutCliente2.cshtml";
 }
 
 <style>
@@ -20,6 +20,40 @@
 	}
 
 </style>
+
+<div class="three_box py-5">
+	<div class="container">
+		<!-- Título central -->
+		<div class="row">
+			<div class="col text-center">
+				<h2>Solicita tu cita en 3 sencillos pasos</h2>
+				<hr> <!-- Una línea horizontal para separar el título de las cajas -->
+			</div>
+		</div>
+
+		<!-- Contenido de las cajas -->
+		<div class="row mt-4">
+			<!-- mt-4 para agregar espacio entre el título y las cajas -->
+			<div class="col-md-4 text-center">
+				<i class="fas fa-car fa-3x mb-3"></i> <!-- Icono de coche -->
+				<h3>Registra tu Vehiculo</h3>
+				<p>Comienza por darnos algunos detalles sobre tu vehículo. Esta información nos ayudará a personalizar los servicios adecuados para tu auto.</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<i class="fas fa-cogs fa-3x mb-3"></i> <!-- Icono de engranajes -->
+				<h3>Selecciona los servicios</h3>
+				<p>Elige los servicios que necesitas. Ya sea un cambio de llantas, alineación, balanceo u otros, estamos aquí para ayudarte.</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<i class="fas fa-envelope fa-3x mb-3"></i> <!-- Icono de sobre -->
+				<h3>Te confirmaremos por correo</h3>
+				<p>Una vez que hayas completado tu solicitud, te enviaremos un correo de confirmación con los detalles de tu cita. ¡Así de fácil!</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="card">
 	<div class="card-body">
 <div class="row">
@@ -110,5 +144,5 @@
 </div>
 </div>
 </div>
-
+<br>
 <script src="~/js/FuncionesReservacion.js"></script>

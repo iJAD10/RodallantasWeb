@@ -1,5 +1,66 @@
-﻿@{
-    ViewData["Title"] = "Principal";
+﻿@model Web_Roda_Llantas.Entities.CountEntities
+
+@{
+    ViewData["Title"] = "Principal"; 
 }
 
-<h1>Bienvenido a Roda Llantas de Turrialba S.A.</h1>
+<style>
+    .icon-background {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.1;
+        font-size: 8rem;
+        z-index: -1;
+    }
+
+</style>
+
+<div class="container">
+    <div class="row">
+        <!-- Tarjeta para OrdenCompra (Azul) -->
+        <div class="col-md-6 mb-3">
+            <div class="card text-white bg-primary" style="position: relative; max-width: 50rem;">
+                <div class="card-header">Pedidos Realizados <i class="fas fa-shopping-cart"></i></div>
+                <div class="card-body">
+                    <i class="fas fa-shopping-cart icon-background"></i>
+                    <h2 class="card-title">@Model.OrdenCompraCount</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta para Reservacion (Verde) -->
+        <div class="col-md-6 mb-3">
+            <div class="card text-white bg-success" style="position: relative; max-width: 50rem;">
+                <div class="card-header">Reservaciones <i class="fas fa-calendar-check"></i></div>
+                <div class="card-body">
+                    <i class="fas fa-calendar-check icon-background"></i>
+                    <h2 class="card-title">@Model.ReservacionCount</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta para Usuario (Amarillo) -->
+        <div class="col-md-6 mb-3">
+            <div class="card text-dark bg-warning" style="position: relative; max-width: 50rem;">
+                <div class="card-header">Usuarios Registrados <i class="fas fa-users"></i></div>
+                <div class="card-body">
+                    <i class="fas fa-users icon-background"></i>
+                    <h2 class="card-title">@Model.UsuarioCount</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta para Bitacora (Rojo) -->
+        <div class="col-md-6 mb-3">
+            <div class="card text-white bg-danger" style="position: relative; max-width: 50rem;">
+                <div class="card-header">Bitácora de Eventos <i class="fas fa-list-alt"></i></div>
+                <div class="card-body">
+                    <i class="fas fa-list-alt icon-background"></i>
+                    <h2 class="card-title">@Model.BitacoraCount</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
