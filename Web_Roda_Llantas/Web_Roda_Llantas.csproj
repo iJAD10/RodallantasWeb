@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="..\..\RodaLlantas de Turrialba Api\API_Roda_Llantas\appsettings.Development.json" CodeGenerator="NSwagCSharp" Link="OpenAPIs\appsettings.Development.json" />
-    <OpenApiReference Include="..\..\RodaLlantas de Turrialba Api\API_Roda_Llantas\appsettings.json" CodeGenerator="NSwagCSharp" Link="OpenAPIs\appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
       <PrivateAssets>all</PrivateAssets>
