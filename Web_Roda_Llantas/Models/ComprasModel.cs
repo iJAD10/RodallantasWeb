@@ -15,14 +15,14 @@ namespace Web_Roda_Llantas.Models
             _contextAccessor = contextAccessor;
         }
 
-        public void FinalizarCompra(int usuId, int total)
+        public void FinalizarCompra(int usuId, int total, string correoUsuario)
         {
             using (var client = new HttpClient())
             {
                 string token = _contextAccessor.HttpContext.Session.GetString("Token").ToString();
                 string urlApi = _configuration.GetSection("apiUrl:usuario").Value + "Compras/FinalizarCompra";
 
-                var request = new CarritoRequest { Usu_Id = usuId, Total = total };
+                var request = new CarritoRequest { Usu_Id = usuId, Total = total, CorreoUsuario = correoUsuario };
                 JsonContent body = JsonContent.Create(request);
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

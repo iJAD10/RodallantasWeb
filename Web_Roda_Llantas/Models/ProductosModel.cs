@@ -155,6 +155,7 @@ namespace Web_Roda_Llantas.Models
         public int Prod_Id { get; set; }
         public int Cantidad { get; set; }
         public int Total { get; set; }
+        public string CorreoUsuario { get; set; }
 
     }
 }

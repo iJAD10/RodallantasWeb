@@ -61,40 +61,6 @@ namespace Web_Roda_Llantas.Controllers
             }
         }
 
-        //[HttpGet]
-        //[FiltroValidaSesion]
-        //public ActionResult PrincipalCliente() {
-        //    ViewBag.OpcionesProductos = new SelectList(_tipoProductoModel.ConsultarTipoProducto(), "TP_Id", "TP_Nombre");
-        //    return View(); }
-
-		//[HttpPost]
-		//public IActionResult Principal(UsuarioEntities entidad)
-		//{
-		//    try
-		//    {
-		//        var resultado = _usuarioModel.ValidarCredenciales(entidad);
-
-		//        if (resultado != null)
-		//        {
-		//            HttpContext.Session.SetString("Nombre", resultado.Usu_Nombre);
-		//            HttpContext.Session.SetString("Correo", resultado.Usu_Correo);
-		//            HttpContext.Session.SetString("Token", resultado.Token);
-		//            HttpContext.Session.SetString("Usu_Id", resultado.Usu_Id.ToString());
-		//            return RedirectToAction("Principal", "Home");
-		//        }
-		//        else
-		//        {
-		//            Alert("Error de validación.", "Por favor verifique sus credenciales.", NotificationType.error);
-		//            return View("Index");
-		//        }
-		//    }
-		//    catch (Exception ex)
-		//    {
-		//        _utilitariosModel.RegistrarBitacora(ex, ControllerContext, 0);
-		//        return View("Error");
-		//    }
-		//}
-
 		[HttpPost]
 		public IActionResult Principal(UsuarioEntities entidad)
 		{
@@ -241,6 +207,7 @@ namespace Web_Roda_Llantas.Controllers
                 ViewBag.OpcionesProductos = _tipoProductoModel.ConsultarTipoProducto();
 
                 return View(datos);
+                
             }
             catch (Exception ex)
             {

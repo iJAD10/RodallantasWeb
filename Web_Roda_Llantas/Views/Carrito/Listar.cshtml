@@ -38,6 +38,7 @@
 <div style="">
     <form method="post" action="@Url.Action("FinalizarCompra", "Compras")" style="display: inline;">
         <input type="hidden" name="usuId" value="@Context.Session.GetString("Usu_Id")" />
+        <input type="hidden" name="correoUsuario" value="@Context.Session.GetString("Correo")" />
         <input type="hidden" name="total" value="@Model.Sum(x => x.TotalPorProducto)" />
         <button type="submit" class="btn btn-primary add-to-cart">Finalizar Compra</button>
     </form>

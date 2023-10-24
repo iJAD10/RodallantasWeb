@@ -1,19 +1,19 @@
-﻿function BuscarNombreApi() {
-    let Identificacion = $('#Usu_Cedula').val();
+﻿//function BuscarNombreApi() {
+//    let Identificacion = $('#Usu_Cedula').val();
 
-    if (Identificacion.trim().length >= 9) {
-        $.ajax({
-            url: `https://apis.gometa.org/cedulas/${Identificacion}`,
-            type: 'GET',
-            dataType: 'json',
-            success: function (res) {
-                $('#Usu_Nombre').val(res.nombre);
-            }
-        });
-    } else {
-        $('#Usu_Nombre').val("");
-    }
-}
+//    if (Identificacion.trim().length >= 9) {
+//        $.ajax({
+//            url: `https://apis.gometa.org/cedulas/${Identificacion}`,
+//            type: 'GET',
+//            dataType: 'json',
+//            success: function (res) {
+//                $('#Usu_Nombre').val(res.nombre);
+//            }
+//        });
+//    } else {
+//        $('#Usu_Nombre').val("");
+//    }
+//}
 
 function BuscarCorreo(funcion) {
     let Usu_Correo = $('#Usu_Correo').val();

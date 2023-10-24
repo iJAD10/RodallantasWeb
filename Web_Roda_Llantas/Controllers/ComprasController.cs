@@ -19,11 +19,11 @@ namespace Web_Roda_Llantas.Controllers
         }
 
         [HttpPost]
-        public IActionResult FinalizarCompra(int usuId, int total)
+        public IActionResult FinalizarCompra(int usuId, int total, string correoUsuario)
         {
             try
             {
-                _comprasModel.FinalizarCompra(usuId, total);
+                _comprasModel.FinalizarCompra(usuId, total,correoUsuario);
 
                 TempData["SuccessMessage"] = "Producto agregado correctamente";
 
