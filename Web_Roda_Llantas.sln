@@ -5,8 +5,7 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web_Roda_Llantas", "Web_Roda_Llantas\Web_Roda_Llantas.csproj", "{57F7449B-33B2-4373-9028-3831537CDCD8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Roda_Llantas", "..\RodaLlantas de Turrialba Api\API_Roda_Llantas\API_Roda_Llantas.csproj", "{4E2ECF2A-5EDC-416A-942E-4F8CCE27CA21}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
