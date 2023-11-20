@@ -54,4 +54,4 @@ jobs:
           app-name: 'Rodallantas'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5EBE8973888D4637B56122B39E5D939D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EB9344F865D34285A57641425192290E }}
