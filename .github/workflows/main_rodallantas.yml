@@ -28,11 +28,14 @@ jobs:
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
+      - name: compress-archive
+        run: Compress-Archive -Path ${{env.DOTNET_ROOT}}/myapp/* -DestinationPath ${{env.DOTNET_ROOT}}/myapp.zip
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.DOTNET_ROOT}}/myapp.zip
 
   deploy:
     runs-on: windows-latest
@@ -54,4 +57,5 @@ jobs:
           app-name: 'Rodallantas'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EB9344F865D34285A57641425192290E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EB9344F865D34285A57641425192290E }}
+
